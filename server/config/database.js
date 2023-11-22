@@ -1,13 +1,12 @@
 const mongoose = require("mongoose");
 
 const connectDatabase = () => {
-  console.log("DB_URI before connection:", process.env.DB_URI);
-
-  mongoose.connect(process.env.DB_URI).then((data) => {
-    console.log(`Mongodb connected with server: ${data.connection.host}`);
-  }).catch((err) => {
-    console.log(err);
-  });
+  mongoose.connect('mongodb://127.0.0.1/Ecommerce')
+    .then((data) => {
+      console.log(`Mongodb connected with server: ${data.connection.host}`);
+    }).catch((err) => {
+      console.log(err)
+    })
 };
 
 module.exports = connectDatabase;
