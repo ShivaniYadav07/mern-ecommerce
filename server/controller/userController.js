@@ -157,11 +157,11 @@ exports.resetPassword = catchAsyncErrors(async (req, res, next) => {
     const isPasswordMatched = await user.comparePassword(req.body.oldPassword);
   
     if (!isPasswordMatched) {
-      return next(new ErrorHander("Old password is incorrect", 400));
+      return next(new ErrorHndler("Old password is incorrect", 400));
     }
   
     if (req.body.newPassword !== req.body.confirmPassword) {
-      return next(new ErrorHander("password does not match", 400));
+      return next(new ErrorHndler("password does not match", 400));
     }
   
     user.password = req.body.newPassword;
@@ -172,3 +172,105 @@ exports.resetPassword = catchAsyncErrors(async (req, res, next) => {
   });
 
 
+  //Update User Profile
+  exports.updateUserRole = catchAsyncErrors(async (req, res, next) => {
+   
+
+    const newUserData = {
+        name:req.body.name,
+        email:req.body.email,
+        role:req.body.role,
+    }
+
+    const user = await User.findByIdAndUpdate(req.params.id, newUserData, {
+        new:true,
+        runValidators:true,
+        useFindAndModify:false,
+    });
+  
+    res.status(200).json({
+        success:true,
+    })
+  });
+
+  // Get all users(admin)
+
+  exports.getAllUser = catchAsyncErrors(async(req, res, next) => {
+    const users = await User.find();
+
+    res.status(200).json({
+    success:true,
+    users,
+})
+  });
+
+//Get single user(admin)
+  exports.getSingleUser = catchAsyncErrors(async (req, res, next) => {
+    const user = await User.findById(req.params.id);
+  
+    if (!user) {
+      return next(new ErrorHndler(`User does not exist with Id: ${req.params.id}`));
+    }
+  
+    res.status(200).json({
+      success: true,
+      user,
+    });
+  });
+//Delete User --Admin
+
+  exports.deleteUser = catchAsyncErrors(async (req, res, next) => {
+   
+const user = await User.findById(req.params.id);
+
+if(!user){
+    return next(new ErrorHndler(`User does not exist with id: ${req.params.id}`));
+}
+
+await user.remove;
+
+    res.status(200).json({
+        success:true,
+        message:"User deleted successfully"
+    })
+  });
+
+  //Create New Review or update the review
+
+  exports.createProductReview = catchAsyncErrors(async (req, res, next) => {
+
+    const {rating, comment, productId} = req.body;
+    const review = {
+        user:req.user._id,
+        name:req.user.name,
+        rating:Number(rating),
+        comment
+    }
+
+    const product = await Product.findById(productId);
+
+    const isReviewed = product.reviews.find(rev => rev.user.toString()===req.user._id.toString())
+
+    if(isReviewed){
+        product.reviews.forEach(rev =>{
+            if(rev.user.toString() === req.user._id.toString())
+            rev.rating=rating,
+            rev.comment=comment
+        })
+    }
+    else{
+        product.reviews.push(review);
+        product.numOfReviews = product.reviews.length
+    }
+
+    let avg = 0
+    product.ratings = product.reviews.forEach(rev =>{
+        avg+=rev.rating
+    }) /product.reviews.length
+
+    await product.save({validateBeforeSave: false});
+
+    res.status(200).json({
+        success:true,
+    })
+  });
