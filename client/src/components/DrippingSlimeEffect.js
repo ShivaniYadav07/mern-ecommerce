@@ -44,8 +44,9 @@ class Drip {
     context.fill();
   }
 
-  reset() {
-    this.x = this.radius * 2 + (Math.random() * (this.effect.width - this.radius * 4));
+  reset(effectWidth) {
+    this.radius = Math.random() * 80 + 20;
+    this.x = 2 * this.radius + (Math.random() * (effectWidth - this.radius * 4));
     this.y = -this.radius;
   }
 }
@@ -79,7 +80,7 @@ class DrippingEffect {
   reset(newWidth, newHeight) {
     this.width = newWidth;
     this.height = newHeight;
-    this.drips.forEach(drip => drip.reset());
+    this.drips.forEach(drip => drip.reset(newWidth));
   }
 }
 
@@ -92,8 +93,8 @@ const DrippingSlimeEffect = () => {
     let effect;
 
     const resizeHandler = () => {
-    //   canvas.width = window.innerWidth;
-    //   canvas.height = window.innerHeight;
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
       ctx.fillStyle = 'white';
       effect.reset(canvas.width, canvas.height);
     };
@@ -103,9 +104,8 @@ const DrippingSlimeEffect = () => {
       effect.init(20);
     };
 
-    // canvas.width = window.innerWidth;
-    // canvas.height = window.innerHeight;
-
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
 
     const animate = () => {
       ctx.fillStyle = 'rgba(0,0,0,.1)';
