@@ -1,5 +1,5 @@
 .banner{
-    background-image: linear-gradient(to right, #565697, rgb(190, 190, 248));
+    background-image: linear-gradient(to right, #565697, #bebef8);
     height: 100vmin;
     display: flex;
     flex-direction: column;
@@ -16,4 +16,93 @@
 
 .banner > p{
     font: 300 1.4vmax "Lucida sans";
+}
+element.style {
+    background: linear-gradient(to bottom left, black, #4d4747);
+    position: relative;
+}
+
+element.style::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-image: linear-gradient(45deg, transparent 99.5%, rgba(255, 255, 255, 0.01) 0.5%);
+    pointer-events: none;
+}
+
+.homeHeading{
+    text-align: center;
+    font-family: Roboto;
+    font-size: 1.4vmax;
+    border-bottom: 1px solid rgba(21, 21, 21, 0.5);
+    width: 20vmax;
+    padding: 1vmax;
+    margin: 5vmax auto;
+    color: rgb(0, 0, 0, 0.7);
+}
+
+.productCard{
+    width: 14vmax;
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    color: rgb(48, 48, 48);
+    margin: 2vmax;
+    transition: all 0.5s;
+    padding-bottom: 0.5vmax;
+}
+
+.productCard > img {
+    width: 14vmax;
+}
+.productCard > div {
+    margin: 0.5vmax;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.productCard > div >span {
+    margin: 0.5vmax;
+    font: 300 0.7vmax "Roboto";
+}
+.productCard > p{
+    font-family: "Rovoto";
+    font-size: 1.2vmax;
+    margin: 1vmax 0.5vmax;
+    margin-bottom: 0;
+}
+
+.productCard > span {
+    margin: 0.5vmax 0.5vmax;
+    color: tomato;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 1vmax;
+}
+
+.productCard:hover{
+    box-shadow: 0 0 5px rgba(15,15,15,0.26);
+    transform: translateY(-1vmax);
+}
+
+@media screen and (max-width: 600px) {
+    .productCard > p {
+        font-size: 1.7vmax;
+    }
+
+    .productCard > div {
+        margin: 0vmax;
+        display: block;
+    }
+
+    .productCard > span {
+        font-size: 1.5vmax;
+    }
+
+    .productCard > div > span {
+        margin: 0 0.5vmax;
+        font: 300 1vmax 'Roboto';
+    }
 }
