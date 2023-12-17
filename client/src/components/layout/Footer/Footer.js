@@ -10,7 +10,7 @@ export default function App() {
   const fontColor = useColorModeValue('black', '#bfb1d9');
 
   return (
-    <MDBFooter bgColor={footerBgColor} color={fontColor}  className='text-center text-lg-start text-muted' >
+    <MDBFooter bgColor={footerBgColor} color={fontColor}  className='text-center  text-lg-start text-muted' >
       <section className='d-flex justify-content-center justify-content-lg-between  border-bottom' >
         <div className='me-5 d-none d-lg-block'>
           <span style={{ color: fontColor }}>Get connected with us on social networks:</span>
