@@ -8,22 +8,22 @@ import Product from './Product.js';
 import { SimpleGrid } from '@chakra-ui/react';
 import MetaData from "../layout/MetaData.js";
 import {getProduct} from "../../actions/productAction.js"
-import {useSelector, useDispatch} from "react-redux"
-
-const product = {
-  name: 'Black Tshirt',
-  images: [{ url:'https://lp2.hm.com/hmgoepprod?set=quality%5B79%5D%2Csource%5B%2Fb3%2Fc1%2Fb3c1b984562210876925d6c994106ecc470f55af.jpg%5D%2Corigin%5Bdam%5D%2Ccategory%5B%5D%2Ctype%5BDESCRIPTIVESTILLLIFE%5D%2Cres%5Bm%5D%2Chmver%5B2%5D&call=url[file:/product/fullscreen]'}],
-  price:'$120',
-  _id: 'shivani',
-}
+import {useSelector, useDispatch} from "react-redux";
+import Loader from "../layout/Loader/Loader.js";
+import {useAlert} from "react-alert";
 
 const Home = () => {
+  const alert = useAlert();
   const dispatch = useDispatch();
   const {loading, error, products, productCount } = useSelector(state => state.products)
 
   useEffect(() => {
-dispatch(getProduct());
-  }, [dispatch])
+    if (error) {
+      return alert.error(error)
+    }
+     dispatch(getProduct());
+    }, [dispatch, error, alert]);
+
   const { colorMode } = useColorMode();
 
   // Define a variable to store the background color based on the color mode
@@ -34,6 +34,10 @@ dispatch(getProduct());
   const fontColor = useColorModeValue('black', '#bfb1d9');
 
   return (
+    <Fragment>
+    {loading ? (
+      <Loader />
+    ): (
     <Fragment>
       <MetaData title="Ecommerce"/>
       <div className='banner' style={{ background: homeBgColor, color: fontColor }}>
@@ -74,6 +78,8 @@ dispatch(getProduct());
         ))}
       </SimpleGrid>
       </div>
+    </Fragment>
+    )}
     </Fragment>
   );
 };

@@ -15,12 +15,12 @@ const Product = ({product}) => {
   const fontColor = useColorModeValue('black', '#bfb1d9');
 
   return (
-    <Link className='productCard' to={product._id}>
+    <Link className='productCard' to={`/product/${product._id}`}>
         <img src={product.images[0].url} alt={product.name}/>
         <p style={{ color: fontColor }}>{product.name}</p>
         <div>
             <ReactStars {...options} />
-            <span style={{ color: fontColor }}>(256 Reviews)</span>
+            <span style={{ color: fontColor }}>({product.numOfReviews} Reviews)</span>
         </div>
         <span>{`₹${product.price}`}</span>
     </Link>
