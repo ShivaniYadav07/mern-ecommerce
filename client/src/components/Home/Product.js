@@ -2,15 +2,15 @@ import React from 'react';
 import ReactStars from 'react-rating-stars-component';
 import {Link} from 'react-router-dom';
 import {  useColorModeValue } from '@chakra-ui/react';
-const options ={
-    edit:false,
-    color: 'rgba(20,20,20,0.1)',
-    activeColor: 'tomato',
-    value: 2.5,
-    isHalf: true,
-    size: window.innerWidth < 600 ? 20: 25,
-}
 const Product = ({product}) => {
+  const options ={
+      edit:false,
+      color: 'rgba(20,20,20,0.1)',
+      activeColor: 'tomato',
+      value: product.ratings,
+      isHalf: true,
+      size: window.innerWidth < 600 ? 20: 25,
+  }
     
   const fontColor = useColorModeValue('black', '#bfb1d9');
 
@@ -22,7 +22,7 @@ const Product = ({product}) => {
             <ReactStars {...options} />
             <span style={{ color: fontColor }}>(256 Reviews)</span>
         </div>
-        <span>{product.price}</span>
+        <span>{`₹${product.price}`}</span>
     </Link>
   )
 }
