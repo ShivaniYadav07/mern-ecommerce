@@ -1,31 +1,30 @@
 import React, { Fragment, useEffect } from 'react';
-import "./ProductDetails.css";
 import Carousel from "react-material-ui-carousel";
+import "./ProductDetails.css";
 import {useSelector, useDispatch} from "react-redux";
-import {getProductDetails} from "../../actions/productAction";
+import { getProductDetails } from '../../actions/productAction';
+import { useParams } from 'react-router-dom';
 
-const ProductDetails = ({match}) => {
+const ProductDetails = () => {
+  let params = useParams();
+  // console.log(params);
   const dispatch = useDispatch();
-  const {product, loading, error} = useSelector((state)=>state.productDetails)
+
+  const {product, loading, error} = useSelector((state) =>state.productDetails)
+
   useEffect(() => {
-    dispatch(getProductDetails(match.params.id))
-  }, [dispatch, match.params.id])
+    dispatch(getProductDetails(params.id))
+  }, [dispatch, params.id])
   return (
     <Fragment>
-      <div className='productDetails'>
-        <div>
+      <div className='ProductDetails'>
+      <div>
         <Carousel>
-                {product.images &&
-                  product.images.map((item, i) => (
-                    <img
-                      className="CarouselImage"
-                      key={i}
-                      src={item.url}
-                      alt={`${i} Slide`}
-                    />
-                  ))}
-              </Carousel>
-        </div>
+          {product.images && product.images.map((item, i) =>(
+            <img className='CarouselImage' key={i} src={item.url} alt={`${i} Slide`}/>
+          ))}
+        </Carousel>
+      </div>
       </div>
     </Fragment>
   )

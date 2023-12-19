@@ -15,7 +15,7 @@ import {useAlert} from "react-alert";
 const Home = () => {
   const alert = useAlert();
   const dispatch = useDispatch();
-  const {loading, error, products, productCount } = useSelector(state => state.products)
+  const {loading, error, products } = useSelector(state => state.products)
 
   useEffect(() => {
     if (error) {
@@ -74,7 +74,7 @@ const Home = () => {
       <div className='container' id='container' style={{ color: fontColor }}>
       <SimpleGrid columns={[2, null, 4]} spacing='40px'>
         {products && products.map(product => (
-          <Product product={product}/>
+          <Product product={product} key={product.id}/>
         ))}
       </SimpleGrid>
       </div>
