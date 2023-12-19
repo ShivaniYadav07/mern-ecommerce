@@ -17,37 +17,56 @@ exports.createProduct = catchAsyncError( async (req, res, next)=>{
 
 
 
-//Get all product (Admin)
+// Get All Product
+exports.getAllProducts = catchAsyncError(async (req, res, next) => {
+  const resultPerPage = 8;
+  const productsCount = await Product.countDocuments();
 
-exports.getAllProducts = catchAsyncError(async(req,res)=> {
+  const apiFeature = new ApiFeatures(Product.find(), req.query)
+    .filter()
+    .search();
 
-    const resultPerPage = 5;
-    const productCount = await Product.countDocuments();
+  apiFeature.pagination(resultPerPage);
+  let products = await apiFeature.query;
 
-    const apiFeature = new ApiFeatures(Product.find(), req.query).search().filter().pagination(resultPerPage);
-    const products = await apiFeature.query;
-    res.status(200).json({
-        success:true,
-        products,
-        productCount,
-    })
-})
+  let filteredProductsCount = products.length;
 
-//getSingleProductDetails
+  
 
 
-exports.getProductDetails = catchAsyncError( async(req, res, next) => {
-const product = await Product.findById(req.params.id);
+  res.status(200).json({
+    success: true,
+    products,
+    productsCount,
+    resultPerPage,
+    filteredProductsCount,
+  });
+});
 
-if(!product){
-    return next(new ErrorHndler("Product not dound", 404))
-}
+// Get All Product (Admin)
+exports.getAdminProducts = catchAsyncError(async (req, res, next) => {
+  const products = await Product.find();
 
-res.status(200).json({
-    success:true,
-    product
-})
-})
+  res.status(200).json({
+    success: true,
+    products,
+  });
+});
+
+
+// Get Product Details
+exports.getProductDetails = catchAsyncError(async (req, res, next) => {
+  const product = await Product.findById(req.params.id);
+
+  if (!product) {
+    return next(new ErrorHndler("Product not found", 404));
+  }
+
+  res.status(200).json({
+    success: true,
+    product,
+  });
+});
 //update Product ===Admin
 
 exports.updateProduct = catchAsyncError( async (req, res, next) =>{
