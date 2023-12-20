@@ -7,6 +7,7 @@ import { Provider } from "react-redux";
 import store from "./Store";
 import { positions, transitions, Provider as AlertProvider } from "react-alert";
 import AlertTemplate from "react-alert-template-basic";
+import 'mdb-ui-kit/css/mdb.min.css';
 
 const options = {
   timeout: 5000,

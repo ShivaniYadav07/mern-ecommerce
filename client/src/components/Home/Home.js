@@ -12,10 +12,10 @@ import {useSelector, useDispatch} from "react-redux";
 import Loader from "../layout/Loader/Loader.js";
 import {useAlert} from "react-alert";
 
-const Home = () => {
+const Home = ({ products: propProducts }) => {
   const alert = useAlert();
   const dispatch = useDispatch();
-  const {loading, error, products } = useSelector(state => state.products)
+  const {loading, error, products, productsCount } = useSelector(state => state.products)
 
   useEffect(() => {
     if (error) {
@@ -73,11 +73,11 @@ const Home = () => {
       <h2 className='homeHeading' style={{color: fontColor }}>Featured Products</h2>
       <div className='container' id='container' style={{ color: fontColor }}>
       <SimpleGrid columns={[2, null, 4]} spacing='40px'>
-        {products && products.map(product => (
-          <Product product={product} key={product.id}/>
+        {products && products.map((product) => (
+          <Product product={product} key={product._id} />
         ))}
       </SimpleGrid>
-      </div>
+    </div>
     </Fragment>
     )}
     </Fragment>
