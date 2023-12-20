@@ -4,10 +4,10 @@ import './Home.css';
 import img from "../image/rays.426980b9.png"
 import { useColorMode, useColorModeValue } from '@chakra-ui/react';
 import { Image } from '@chakra-ui/react';
-import Product from './Product.js';
+import Product from './ProductCard.js';
 import { SimpleGrid } from '@chakra-ui/react';
 import MetaData from "../layout/MetaData.js";
-import {getProduct} from "../../actions/productAction.js"
+import {clearErrors, getProduct} from "../../actions/productAction.js"
 import {useSelector, useDispatch} from "react-redux";
 import Loader from "../layout/Loader/Loader.js";
 import {useAlert} from "react-alert";
@@ -19,7 +19,8 @@ const Home = ({ products: propProducts }) => {
 
   useEffect(() => {
     if (error) {
-      return alert.error(error)
+     alert.error(error);
+     dispatch(clearErrors());
     }
      dispatch(getProduct());
     }, [dispatch, error, alert]);
