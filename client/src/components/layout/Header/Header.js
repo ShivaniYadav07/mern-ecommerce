@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Drawer,
   DrawerBody,
@@ -10,14 +10,23 @@ import {
   DrawerHeader,
   VStack,
   HStack,
+  
 } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
+import {Search2Icon} from "@chakra-ui/icons"
 import { BiMenuAltLeft } from 'react-icons/bi';
 const Header = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
+
+  const toggleSearch = () => {
+    setIsSearchOpen(!isSearchOpen);
+  };
+
   return (
     <>
+    
       <Button
         pos={'fixed'}
         top={'4'}
@@ -32,6 +41,22 @@ const Header = () => {
       >
         <BiMenuAltLeft size={'20'} />
       </Button>
+
+      <Button
+        pos={'fixed'}
+        top={'4'}
+        right={'14'}
+        colorScheme="purple"
+        p={'0'}
+        w={'10'}
+        h={'10'}
+        borderRadius={'full'}
+        zIndex={'overlay'}
+        onClick={toggleSearch}
+      >
+        <Link to={'/search'}><Search2Icon size={'20'} /></Link>
+        
+      </Button>
       <Drawer isOpen={isOpen} placement="left" onClose={onClose}>
         <DrawerOverlay />
 
@@ -45,7 +70,7 @@ const Header = () => {
               </Button>
 
               <Button onClick={onClose} variant={'ghost'} colorScheme="purple">
-                <Link to={'/products'}>Product</Link>
+                <Link to={'/products'}>Products</Link>
               </Button>
 
               <Button onClick={onClose} variant={'ghost'} colorScheme="purple">
