@@ -8,6 +8,8 @@ import Products from "./components/Product/Products.js";
 import Search from "./components/Product/Search.js"
 
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom"
+import Login from './components/User/Login.js';
+import Signup from './components/User/SignUp.js';
 
 function App() {
   return (
@@ -20,6 +22,8 @@ function App() {
         <Route exact path="/products" element={<Products />} />
         <Route path="/products/:keyword" element={<Products />} />
         <Route exact path="/search" element={<Search />} />
+        <Route exact path="/login" element={<Login />} />
+        <Route exact path="/Signup" element={<Signup />} />
       </Routes>
       <Footer />
     </Router>
