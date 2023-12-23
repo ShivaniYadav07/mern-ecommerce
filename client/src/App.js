@@ -5,11 +5,10 @@ import Footer from "./components/layout/Footer/Footer.js";
 import Home from "./components/Home/Home.js";
 import ProductDetails from "./components/Product/ProductDetails.js";
 import Products from "./components/Product/Products.js";
-import Search from "./components/Product/Search.js"
+import Search from "./components/Product/Search.js";
+import LoginSignup from "./components/User/LoginSignup"
 
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom"
-import Login from './components/User/Login.js';
-import Signup from './components/User/SignUp.js';
 
 function App() {
   return (
@@ -22,8 +21,7 @@ function App() {
         <Route exact path="/products" element={<Products />} />
         <Route path="/products/:keyword" element={<Products />} />
         <Route exact path="/search" element={<Search />} />
-        <Route exact path="/login" element={<Login />} />
-        <Route exact path="/Signup" element={<Signup />} />
+        <Route exact path="/loginsignup" element={<LoginSignup />} />
       </Routes>
       <Footer />
     </Router>
