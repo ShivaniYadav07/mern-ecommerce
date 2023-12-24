@@ -5,10 +5,11 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: rgb(231, 231, 231);
-    position: fixed;
-    top: 0%;
-    left: 0;
+    background-color: rgb(255, 255, 255);
+    /* position: relative; */
+    /* top: 20%; */
+    /* left: 0; */
+    /* padding: 25px; */
   }
   
   .LoginSignUpBox {
@@ -166,6 +167,7 @@
     .LoginSignUpBox {
       width: 100vw;
       height: 95vh;
+      padding-top: 40px;
     }
     .login_signUp_toggle {
       height: 5vmax;

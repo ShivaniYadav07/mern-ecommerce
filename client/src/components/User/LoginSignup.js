@@ -6,16 +6,17 @@ import MailOutlineIcon from "@material-ui/icons/MailOutline";
 import LockOpenIcon from "@material-ui/icons/LockOpen";
 import FaceIcon from "@material-ui/icons/Face";
 import { useDispatch, useSelector } from "react-redux";
-import { clearErrors, login } from "../../actions/userAction";
+import { clearErrors, login, register } from "../../actions/userAction";
 import { useAlert } from "react-alert";
+import { useNavigate } from "react-router-dom";
 
-// const LoginSignUp = ({ history, location }) => {
-//   const dispatch = useDispatch();
-//   const alert = useAlert();
-
-//   const { error, loading, isAuthenticated } = useSelector(
-//     (state) => state.user
-//   );
+const LoginSignUp = ({location }) => {
+  const dispatch = useDispatch();
+  const alert = useAlert();
+  const navigate = useNavigate();
+  const { error, loading, isAuthenticated } = useSelector(
+    (state) => state.user
+  );
 
   const loginTab = useRef(null);
   const registerTab = useRef(null);
@@ -33,7 +34,7 @@ import { useAlert } from "react-alert";
   const { name, email, password } = user;
 
   const [avatar, setAvatar] = useState();
-  const [avatarPreview, setAvatarPreview] = useState("/Profile.png");
+  const [avatarPreview, setAvatarPreview] = useState("./Profile.png");
 
   const loginSubmit = (e) => {
     e.preventDefault();
@@ -42,13 +43,14 @@ import { useAlert } from "react-alert";
 
   const registerSubmit = (e) => {
     e.preventDefault();
-
+  
     const myForm = new FormData();
 
     myForm.set("name", name);
     myForm.set("email", email);
     myForm.set("password", password);
     myForm.set("avatar", avatar);
+    dispatch(register(myForm))
   };
 
   const registerDataChange = (e) => {
@@ -68,7 +70,7 @@ import { useAlert } from "react-alert";
     }
   };
 
-  const redirect = location.search ? location.search.split("=")[1] : "/account";
+  // const redirect = location.search ? location.search.split("=")[1] : "/account";
 
   useEffect(() => {
     if (error) {
@@ -77,9 +79,9 @@ import { useAlert } from "react-alert";
     }
 
     if (isAuthenticated) {
-      history.push(redirect);
+      navigate("/account");
     }
-  }, [dispatch, error, alert, history, isAuthenticated, redirect]);
+  }, [dispatch, error, alert, navigate, isAuthenticated]);
 
   const switchTabs = (e, tab) => {
     if (tab === "login") {
@@ -101,8 +103,8 @@ import { useAlert } from "react-alert";
   return (
     <Fragment>
       {loading ? (
-        <Loader />
-      ) : (
+      <Loader />
+    ): (
         <Fragment>
           <div className="LoginSignUpContainer">
             <div className="LoginSignUpBox">
