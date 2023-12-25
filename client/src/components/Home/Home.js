@@ -27,7 +27,6 @@ const Home = ({ products: propProducts }) => {
 
   const { colorMode } = useColorMode();
 
-  // Define a variable to store the background color based on the color mode
   const homeBgColor =
     colorMode === 'dark'
       ? 'conic-gradient(from 45deg at 90% 0%, #050505, #1d1d37)'
