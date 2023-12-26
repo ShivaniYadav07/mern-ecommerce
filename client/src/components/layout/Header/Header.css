@@ -2,10 +2,35 @@
     position: fixed;
     right: 8vmax;
     top: 0.5vmax;
+
 }
 
 .speedDialIcon{
     width: 56px;
     height: 56px;
     border-radius: 100%;
+}
+@media screen and (max-width: 1275px){
+    .speedDial{
+        right: 10vmax;
+        width: 36px;
+    }
+}
+@media screen and (max-width: 1000px){
+    .speedDial{
+        right: 12vmax;
+        top: 8px;
+    }
+}
+@media screen and (max-width: 700px){
+    .speedDial{
+        right: 15vmax;
+        top: 8px;
+    }
+}
+@media screen and (max-width: 450px){
+    .speedDial{
+        right: 18vmax;
+        top: 8px;
+    }   
 }

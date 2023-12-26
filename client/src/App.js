@@ -1,5 +1,6 @@
 import './App.css';
 import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom"
 // import DrippingSlimeEffect from './components/DrippingSlimeEffect.js';
 import Header from "./components/layout/Header/Header.js";
 import Footer from "./components/layout/Footer/Footer.js";
@@ -9,11 +10,12 @@ import Products from "./components/Product/Products.js";
 import Search from "./components/Product/Search.js";
 import LoginSignup from "./components/User/LoginSignup"
 import UserOptions from "./components/layout/Header/UserOptions.js"
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom"
 import store from "./Store.js"
 import { loadUser } from './actions/userAction.js';
 import { useSelector } from 'react-redux';
 import Profile from './components/User/Profile.js';
+import ProtectedRoute from "./components/Route/ProtectedRoute.js";
+import UpdateProfile from "./components/User/UpdateProfile.js"
 function App() {
 const {isAuthenticated, user} = useSelector((state) => state.user);
 
@@ -32,9 +34,9 @@ const {isAuthenticated, user} = useSelector((state) => state.user);
         <Route exact path="/products" element={<Products />} />
         <Route path="/products/:keyword" element={<Products />} />
         <Route exact path="/search" element={<Search />} />
-        <Route exact path="/account" element={<Profile />} />
-
-        <Route exact path="/loginsignup" element={<LoginSignup />} />
+        <Route exact path='/account' element={<ProtectedRoute><Profile /></ProtectedRoute>} />
+        <Route exact path='/me/update' element={<ProtectedRoute><UpdateProfile /></ProtectedRoute>}/>
+    <Route exact path="/loginsignup" element={<LoginSignup />} />
       </Routes>
       <Footer />
     </Router>

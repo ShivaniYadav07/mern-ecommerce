@@ -27,8 +27,9 @@
   
   .profileContainer > div:first-child > img {
     width: 20vmax;
-    border-radius: 50%;
+    border-radius: 100%;
     transition: all 0.5s;
+    height: 20vmax;
   }
   
   .profileContainer > div:first-child > img:hover {
