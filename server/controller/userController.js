@@ -185,19 +185,13 @@ exports.updateProfile = catchAsyncErrors(async (req, res, next) => {
     name: req.body.name,
     email: req.body.email,
   };
-
-  if (req.body.avatar && req.body.avatar !== "") {
+  if (req.body.avatar !== "") {
     const user = await User.findById(req.user.id);
 
-    // Check if the user has an existing avatar before attempting to delete
-    if (user.avatar && user.avatar.public_id) {
-      const imageId = user.avatar.public_id;
-      
-      // Delete the existing avatar on Cloudinary
-      await cloudinary.v2.uploader.destroy(imageId);
-    }
+    const imageId = user.avatar.public_id;
 
-    // Upload the new avatar to Cloudinary
+    await cloudinary.v2.uploader.destroy(imageId);
+
     const myCloud = await cloudinary.v2.uploader.upload(req.body.avatar, {
       folder: "avatars",
       width: 150,
@@ -210,18 +204,17 @@ exports.updateProfile = catchAsyncErrors(async (req, res, next) => {
     };
   }
 
-  // Update user data in the database
   const user = await User.findByIdAndUpdate(req.user.id, newUserData, {
     new: true,
     runValidators: true,
     useFindAndModify: false,
   });
 
-  // Send the response
   res.status(200).json({
     success: true,
   });
 });
+
 
 
   // Get all users(admin)
@@ -248,7 +241,7 @@ exports.updateProfile = catchAsyncErrors(async (req, res, next) => {
       user,
     });
   });
-  
+
   // update User Role -- Admin
 exports.updateUserRole = catchAsyncErrors(async (req, res, next) => {
   const newUserData = {
@@ -267,7 +260,6 @@ exports.updateUserRole = catchAsyncErrors(async (req, res, next) => {
     success: true,
   });
 });
-
 
 //Delete User --Admin
 

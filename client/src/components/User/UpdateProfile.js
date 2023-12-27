@@ -70,7 +70,7 @@ const UpdateProfile = () => {
         type: UPDATE_PROFILE_RESET,
       });
     }
-  }, [dispatch, error, alert, user, isUpdated]);
+  }, [dispatch, error, alert, navigate, user, isUpdated]);
   return (
     <Fragment>
       {loading ? (
@@ -84,7 +84,7 @@ const UpdateProfile = () => {
 
               <form
                 className="updateProfileForm"
-                encType="multipart/form-data"
+                enctype="multipart/form-data"
                 onSubmit={updateProfileSubmit}
               >
                 <div className="updateProfileName">
@@ -113,9 +113,7 @@ const UpdateProfile = () => {
                 <div id="updateProfileImage">
                   <img src={avatarPreview} alt="Avatar Preview" />
                   <input
-                    type="file"
-                    name="avatar"
-                    accept="image/*"
+                    type="file" name="avatar" accept="image/*"
                     onChange={updateProfileDataChange}
                   />
                 </div>

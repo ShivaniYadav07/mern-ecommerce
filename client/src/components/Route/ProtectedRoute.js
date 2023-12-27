@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
 import { useSelector } from "react-redux";
-import { Navigate, Route,  } from "react-router-dom";
+import { Navigate,  } from "react-router-dom";
 
 const ProtectedRoute = ({ isAdmin, children }) => {
     const { loading, isAuthenticated, user } = useSelector(state => state.user)

@@ -5,14 +5,14 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: rgb(255, 255, 255);
+    /* background-color: rgb(255, 255, 255); */
     /* position: fixed; */
     /* top: 0%; */
     /* left: 0; */
   }
   
   .updateProfileBox {
-    background-color: white;
+    /* background-color: white; */
     width: 25vw;
     height: 70vh;
     box-sizing: border-box;

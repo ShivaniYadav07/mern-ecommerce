@@ -80,18 +80,21 @@ export const logout = () => async (dispatch) => {
 //Update Profile
 export const updateProfile = (userData) => async (dispatch) => {
   try {
-    dispatch ({ type: UPDATE_PROFILE_REQUEST  });
-    const config = { header : {"Content-Type":"multipart/form-data"}};
-    const {data} = await axios.put(`/api/v1/me/update`, userData, config);
-    dispatch({type: UPDATE_PROFILE_SUCCESS, payload:data.success});
+    dispatch({ type: UPDATE_PROFILE_REQUEST });
 
-  } catch (error){
+    const config = { headers: { "Content-Type": "multipart/form-data" } };
+
+    const { data } = await axios.put(`/api/v1/me/update`, userData, config);
+
+    dispatch({ type: UPDATE_PROFILE_SUCCESS, payload: data.success });
+  } catch (error) {
     dispatch({
       type: UPDATE_PROFILE_FAIL,
-      payload:error.response.data.message,
-    })
+      payload: error.response.data.message,
+    });
   }
-}
+};
+
 
       // clearing Errors
       export const clearErrors = () => async (dispatch) => {
