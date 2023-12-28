@@ -25,12 +25,13 @@ const UpdateProfile = () => {
 
   const updateProfileSubmit = (e) => {
     e.preventDefault();
-
+  
     const myForm = new FormData();
-
+  
     myForm.set("name", name);
     myForm.set("email", email);
-    myForm.set("avatar", avatar);
+    myForm.append("avatar", avatar); // Use the avatar state here
+  
     dispatch(updateProfile(myForm));
   };
 
@@ -84,7 +85,7 @@ const UpdateProfile = () => {
 
               <form
                 className="updateProfileForm"
-                enctype="multipart/form-data"
+                encType="multipart/form-data"
                 onSubmit={updateProfileSubmit}
               >
                 <div className="updateProfileName">

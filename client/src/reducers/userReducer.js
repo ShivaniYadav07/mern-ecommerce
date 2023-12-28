@@ -15,11 +15,7 @@ import { LOGIN_REQUEST,
     UPDATE_PROFILE_FAIL,
       CLEAR_ERRORS} from "../constants/userConstants"
 
-      const initialState = {
-        loading: false,
-        isUpdated: false,
-        error: null,
-      };
+      
 
 export const userReducer = (state = { user: [] }, action) => {
     switch (action.type) {
@@ -81,7 +77,7 @@ export const userReducer = (state = { user: [] }, action) => {
 }
 
 
-export const profileReducer = (state = initialState, action) => {
+export const profileReducer = (state = {}, action) => {
     switch (action.type) {
         case UPDATE_PROFILE_REQUEST :
             return {
