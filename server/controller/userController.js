@@ -7,6 +7,7 @@ const crypto = require("crypto");
 const cloudinary = require("cloudinary");
 
 
+//Register a user
 exports.registerUser = catchAsyncErrors( async(req, res, next)=>{
 
   const myCloud = await cloudinary.v2.uploader.upload(req.body.avatar, {
@@ -181,33 +182,30 @@ exports.resetPassword = catchAsyncErrors(async (req, res, next) => {
 
 // update User Profile
 exports.updateProfile = catchAsyncErrors(async (req, res, next) => {
-  // object with user new data
   const newUserData = {
     name: req.body.name,
     email: req.body.email,
   };
 
-  // if avatar not empty then
-  if (req.body.avatar && req.body.avatar !== "") {
+  if (req.body.avatar !== "") {
     const user = await User.findById(req.user.id);
     const imageId = user.avatar.public_id;
 
-    //  await cloudinary.v2.uploader.destroy(imageId); // delete old Image from cloudnairy
-    await cloudinary.v2.uploader.destroy(imageId);
+    
+   await cloudinary.v2.uploader.destroy(imageId);
 
-    const myCloud = await cloudinary.v2.uploader.upload(req.body.avatar, {
-      folder: "Avatar", // this folder cloudainry data base manage by us
-      width: 150,
-      crop: "scale",
-    });
+   const myCloud = await cloudinary.v2.uploader.upload(req.body.avatar, {
+    folder: "avatars",
+    width:150,
+    crop: "scale",
+  })
 
     newUserData.avatar = {
-      public_id: myCloud.public_id, // id for img
-      url: myCloud.secure_url, // new User data
+      public_id: myCloud.public_id,
+      url: myCloud.secure_url,
     };
   }
 
-  // set new value of user
   const user = await User.findByIdAndUpdate(req.user.id, newUserData, {
     new: true,
     runValidators: true,
@@ -217,7 +215,6 @@ exports.updateProfile = catchAsyncErrors(async (req, res, next) => {
   await user.save();
   res.status(200).json({
     success: true,
-    user,
   });
 });
 
