@@ -10,6 +10,14 @@
     height: 56px;
     border-radius: 100%;
 }
+.CiShoppingCart{
+    cursor: pointer;
+    text-align: center;
+}
+svg{
+    
+    font-size: 22px;
+}
 @media screen and (max-width: 1275px){
     .speedDial{
         right: 10vmax;

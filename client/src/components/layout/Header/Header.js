@@ -15,6 +15,7 @@ import {
 import { Link } from 'react-router-dom';
 import {Search2Icon} from "@chakra-ui/icons"
 import { BiMenuAltLeft } from 'react-icons/bi';
+import { CiShoppingCart } from "react-icons/ci";
 const Header = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
@@ -92,9 +93,9 @@ const Header = () => {
               <Button onClick={onClose} colorScheme={'purple'}>
                 <Link to={'/loginsignup'}> Log In </Link>
               </Button>
-              <Button onClick={onClose}  colorScheme={'purple'} variant={'outline'}>
-                <Link to={'/signup'}> Sign Up </Link>
-              </Button>
+              <Link to={'/cart'}>
+              <CiShoppingCart />
+              </Link>
             </HStack>
           </DrawerBody>
         </DrawerContent>
