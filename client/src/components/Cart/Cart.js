@@ -2,7 +2,7 @@ import React, { Fragment } from "react";
 import "./Cart.css";
 import CartItemCard from "./CartItemCard.js";
 import { useSelector, useDispatch } from "react-redux";
-import { addItemsToCart } from "../../actions/cartAction";
+import { addItemsToCart, removeItemsFromCart } from "../../actions/cartAction";
 import { Typography } from "@material-ui/core";
 import RemoveShoppingCartIcon from "@material-ui/icons/RemoveShoppingCart";
 import { Link, useNavigate } from "react-router-dom";
@@ -29,7 +29,7 @@ const Cart = () => {
   };
 
   const deleteCartItems = (id) => {
-    // dispatch(removeItemsFromCart(id));
+    dispatch(removeItemsFromCart(id));
   };
 
   const checkoutHandler = () => {
@@ -66,7 +66,7 @@ const Cart = () => {
                     >
                       -
                     </button>
-                    <input type="number" value={item.quantity} readOnly />
+                    {item.quantity}
                     <button
                       onClick={() =>
                         increaseQuantity(
