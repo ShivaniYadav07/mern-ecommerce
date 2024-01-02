@@ -1,16 +1,15 @@
 import React, { Fragment, useRef, useState, useEffect } from "react";
 import "./LoginSignUp.css";
 import Loader from "../layout/Loader/Loader";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import MailOutlineIcon from "@material-ui/icons/MailOutline";
 import LockOpenIcon from "@material-ui/icons/LockOpen";
 import FaceIcon from "@material-ui/icons/Face";
 import { useDispatch, useSelector } from "react-redux";
 import { clearErrors, login, register } from "../../actions/userAction";
 import { useAlert } from "react-alert";
-import { useNavigate } from "react-router-dom";
 
-const LoginSignUp = ({location }) => {
+const LoginSignUp = ({ location }) => {
   const dispatch = useDispatch();
   const alert = useAlert();
   const navigate = useNavigate();
@@ -33,8 +32,8 @@ const LoginSignUp = ({location }) => {
 
   const { name, email, password } = user;
 
-  const [avatar, setAvatar] = useState();
-  const [avatarPreview, setAvatarPreview] = useState("./Profile.png");
+  const [avatar, setAvatar] = useState("/Profile.png");
+  const [avatarPreview, setAvatarPreview] = useState("/Profile.png");
 
   const loginSubmit = (e) => {
     e.preventDefault();
@@ -43,14 +42,14 @@ const LoginSignUp = ({location }) => {
 
   const registerSubmit = (e) => {
     e.preventDefault();
-  
+
     const myForm = new FormData();
 
     myForm.set("name", name);
     myForm.set("email", email);
     myForm.set("password", password);
     myForm.set("avatar", avatar);
-    dispatch(register(myForm))
+    dispatch(register(myForm));
   };
 
   const registerDataChange = (e) => {
@@ -70,7 +69,7 @@ const LoginSignUp = ({location }) => {
     }
   };
 
-  // const redirect = location.search ? location.search.split("=")[1] : "/account";
+  const redirect = location && location.search ? location.search.split("=")[1] : "/account";
 
   useEffect(() => {
     if (error) {
@@ -79,9 +78,9 @@ const LoginSignUp = ({location }) => {
     }
 
     if (isAuthenticated) {
-      navigate("/account");
+      navigate(redirect);
     }
-  }, [dispatch, error, alert, navigate, isAuthenticated]);
+  }, [dispatch, error, alert, navigate, isAuthenticated, redirect]);
 
   const switchTabs = (e, tab) => {
     if (tab === "login") {
@@ -103,8 +102,8 @@ const LoginSignUp = ({location }) => {
   return (
     <Fragment>
       {loading ? (
-      <Loader />
-    ): (
+        <Loader />
+      ) : (
         <Fragment>
           <div className="LoginSignUpContainer">
             <div className="LoginSignUpBox">

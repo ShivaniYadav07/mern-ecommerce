@@ -1,30 +1,44 @@
 import './App.css';
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom"
-// import DrippingSlimeEffect from './components/DrippingSlimeEffect.js';
-import Header from "./components/layout/Header/Header.js";
-import Footer from "./components/layout/Footer/Footer.js";
-import Home from "./components/Home/Home.js";
-import ProductDetails from "./components/Product/ProductDetails.js";
-import Products from "./components/Product/Products.js";
-import Search from "./components/Product/Search.js";
+// import DrippingSlimeEffect from './components/DrippingSlimeEffect';
+import Header from "./components/layout/Header/Header";
+import Footer from "./components/layout/Footer/Footer";
+import Home from "./components/Home/Home";
+import ProductDetails from "./components/Product/ProductDetails";
+import Products from "./components/Product/Products";
+import Search from "./components/Product/Search";
 import LoginSignup from "./components/User/LoginSignup"
-import UserOptions from "./components/layout/Header/UserOptions.js"
-import store from "./Store.js"
-import { loadUser } from './actions/userAction.js';
+import UserOptions from "./components/layout/Header/UserOptions"
+import store from "./Store"
+import { loadUser } from './actions/userAction';
 import { useSelector } from 'react-redux';
-import Profile from './components/User/Profile.js';
-import ProtectedRoute from "./components/Route/ProtectedRoute.js";
-import UpdateProfile from "./components/User/UpdateProfile.js";
-import UpdatePassword from "./components/User/UpdatePassword.js";
-import ForgotPassword from "./components/User/ForgotPassword.js"
-import ResetPassword from "./components/User/ResetPassword.js"
-import Cart from "./components/Cart/Cart.js"
+import Profile from './components/User/Profile';
+import ProtectedRoute from "./components/Route/ProtectedRoute";
+import UpdateProfile from "./components/User/UpdateProfile";
+import UpdatePassword from "./components/User/UpdatePassword";
+import ForgotPassword from "./components/User/ForgotPassword"
+import ResetPassword from "./components/User/ResetPassword"
+import Cart from "./components/Cart/Cart"
+import Shipping from "./components/Cart/Shipping"
+import ConfirmOrder from "./components/Cart/ConfirmOrder"
+import Payment from "./components/Cart/Payment.js"
+import axios from 'axios';
+import { loadStripe } from '@stripe/stripe-js';
+import { Elements } from '@stripe/react-stripe-js';
 function App() {
 const {isAuthenticated, user} = useSelector((state) => state.user);
+const [stripeApiKey, setStripeApiKey] = useState("");
 
-      React.useEffect(() =>{
+      async function getStripeApiKey() {
+        const { data } = await axios.get("/api/v1/stripeapikey");
+
+        setStripeApiKey(data.stripeApiKey);
+      }
+
+      useEffect(() =>{
        store.dispatch(loadUser())
+       getStripeApiKey();
       }, [])
 
   return (
@@ -45,7 +59,11 @@ const {isAuthenticated, user} = useSelector((state) => state.user);
         <Route exact path='/password/reset/:token' element={<ResetPassword />}/>
         <Route exact path="/loginsignup" element={<LoginSignup />} />
         <Route exact path="/cart" element={<Cart />} />
-      </Routes>
+        <Route exact path='/shipping' element={<ProtectedRoute><Shipping /></ProtectedRoute>}/>
+        <Route exact path="/order/confirm" element={<ConfirmOrder />} />
+        
+        {stripeApiKey && ( <Route exact path='/process/payment' element={<Elements stripe={loadStripe(stripeApiKey)}><ProtectedRoute><Payment /></ProtectedRoute></Elements>}/>)}
+       </Routes>
       <Footer />
     </Router>
   );
