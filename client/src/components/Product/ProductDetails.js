@@ -9,7 +9,7 @@ import ReviewCard from "./ReviewCard.js";
 import Loader from "../layout/Loader/Loader.js";
 import {useAlert} from "react-alert";
 import {addItemsToCart} from "../../actions/cartAction.js"
-const ProductDetails = ({match}) => {
+const ProductDetails = () => {
   const alert = useAlert();
   let params = useParams();
   const dispatch = useDispatch();
