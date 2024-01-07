@@ -4,7 +4,7 @@ import './Home.css';
 import img from "../image/rays.426980b9.png"
 import { useColorMode, useColorModeValue } from '@chakra-ui/react';
 import { Image } from '@chakra-ui/react';
-import Product from './ProductCard.js';
+import ProductCard from './ProductCard.js';
 import { SimpleGrid } from '@chakra-ui/react';
 import MetaData from "../layout/MetaData.js";
 import {clearErrors, getProduct} from "../../actions/productAction.js"
@@ -74,7 +74,7 @@ const Home = ({ products: propProducts }) => {
       <div className='container' id='container' style={{ color: fontColor }}>
       <SimpleGrid columns={[2, null, 4]} spacing='40px'>
         {products && products.map((product) => (
-          <Product product={product} key={product._id} />
+          <ProductCard product={product} key={product._id} />
         ))}
       </SimpleGrid>
     </div>

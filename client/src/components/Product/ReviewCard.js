@@ -5,8 +5,9 @@ import profile from "../image/profile.png";
 const ReviewCard = ({ review }) => {
   const options = {
     value: review.rating,
-    readOnly: true,
+    readOnly: false,
     precision: 0.5,
+    name: `review-${review.id}`,
   };
 
   return (
