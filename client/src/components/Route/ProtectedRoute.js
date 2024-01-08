@@ -9,8 +9,8 @@ const ProtectedRoute = ({ isAdmin, children }) => {
         return <Navigate to='/loginsignup' />
     }
 
-    if (!loading && isAdmin === true && user.role !== 'admin') {
-        return <Navigate to='/login' />
+    if (loading && isAdmin === true && user.role !== 'admin') {
+        return <Navigate to='/loginsignup' />
     }
 
     return <Fragment>{loading === false ? children : null}</Fragment>

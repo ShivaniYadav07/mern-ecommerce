@@ -70,7 +70,7 @@ const [stripeApiKey, setStripeApiKey] = useState("");
         <Route exact path='/orders' element={<ProtectedRoute><MyOrders /></ProtectedRoute>}/>
         <Route exact path="/order/confirm" element={<ConfirmOrder />} />
         <Route exact path='/order/:id' element={<ProtectedRoute><OrderDetails /></ProtectedRoute>}/>
-        <Route exact path='/admin/dashboard' element={<ProtectedRoute><Dashboard /></ProtectedRoute>}/>
+        <Route exact path='/admin/dashboard' element={<ProtectedRoute isAdmin={true}><Dashboard /></ProtectedRoute>}/>
 
        </Routes>
       <Footer />
