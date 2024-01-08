@@ -27,6 +27,8 @@ import OrderSuccess from "./components/Cart/OrderSuccess.js"
 import MyOrders from "./components/Order/MyOrders.js"
 import OrderDetails from "./components/Order/OrderDetails.js"
 import Dashboard from "./components/admin/Dashboard.js"
+import ProductList from "./components/admin/ProductList.js"
+import NewProduct from "./components/admin/NewProduct.js"
 import axios from 'axios';
 import { loadStripe } from '@stripe/stripe-js';
 import { Elements } from '@stripe/react-stripe-js';
@@ -71,6 +73,8 @@ const [stripeApiKey, setStripeApiKey] = useState("");
         <Route exact path="/order/confirm" element={<ConfirmOrder />} />
         <Route exact path='/order/:id' element={<ProtectedRoute><OrderDetails /></ProtectedRoute>}/>
         <Route exact path='/admin/dashboard' element={<ProtectedRoute isAdmin={true}><Dashboard /></ProtectedRoute>}/>
+        <Route exact path='/admin/products' element={<ProtectedRoute isAdmin={true}><ProductList /></ProtectedRoute>}/>
+        <Route exact path='/admin/product' element={<ProtectedRoute isAdmin={true}><NewProduct /></ProtectedRoute>}/>
 
        </Routes>
       <Footer />

@@ -1,19 +1,23 @@
 import React, { Fragment } from "react";
 import { useSelector } from "react-redux";
-import { Navigate,  } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 
 const ProtectedRoute = ({ isAdmin, children }) => {
-    const { loading, isAuthenticated, user } = useSelector(state => state.user)
+  const { loading, isAuthenticated, user } = useSelector((state) => state.user);
 
-    if (!loading && isAuthenticated === false) {
-        return <Navigate to='/loginsignup' />
+  if (loading === false) {
+    if (isAuthenticated === false) {
+      return <Navigate to="/loginsignup" />;
     }
 
-    if (loading && isAdmin === true && user.role !== 'admin') {
-        return <Navigate to='/loginsignup' />
+    if (isAdmin === true && user.role !== "admin") {
+      return <Navigate to="/loginsignup" />;
     }
 
-    return <Fragment>{loading === false ? children : null}</Fragment>
-}
+    return <Fragment>{children}</Fragment>;
+  }
+
+  return null; // Return null while loading is true
+};
 
 export default ProtectedRoute;
