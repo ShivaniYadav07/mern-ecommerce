@@ -19,9 +19,9 @@ import {
 // import { useSelector } from "react-redux";
 import { useSelector, useDispatch } from "react-redux";
 import { getAdminProduct } from "../../actions/productAction";
-// import { getAllOrders } from "../../actions/orderAction.js";
+import { getAllOrders } from "../../actions/orderAction.js";
 // import { getAllUsers } from "../../actions/userAction.js";
-// import MetaData from "../layout/MetaData";
+import MetaData from "../layout/MetaData";
 const Dashboard = () => {
     ChartJS.register(
         CategoryScale,
@@ -37,9 +37,9 @@ const Dashboard = () => {
 
   const { products } = useSelector((state) => state.products);
 
-//   const { orders } = useSelector((state) => state.allOrders);
+  const { orders } = useSelector((state) => state.allOrders);
 
-//   const { users } = useSelector((state) => state.allUsers);
+  // const { users } = useSelector((state) => state.allUsers);
 
   let outOfStock = 0;
 
@@ -52,15 +52,15 @@ const Dashboard = () => {
 
   useEffect(() => {
     dispatch(getAdminProduct());
-    // dispatch(getAllOrders());
+    dispatch(getAllOrders());
     // dispatch(getAllUsers());
   }, [dispatch]);
 
-//   let totalAmount = 0;
-//   orders &&
-//     orders.forEach((item) => {
-//       totalAmount += item.totalPrice;
-//     });
+  let totalAmount = 0;
+  orders &&
+    orders.forEach((item) => {
+      totalAmount += item.totalPrice;
+    });
 
   const lineState = {
     labels: ["Initial Amount", "Amount Earned"],
@@ -87,7 +87,7 @@ const Dashboard = () => {
 
   return (
     <div className="dashboard">
-      {/* <MetaData title="Dashboard - Admin Panel" /> */}
+      <MetaData title="Dashboard - Admin Panel" />
       <Sidebar />
 
       <div className="dashboardContainer">
@@ -96,7 +96,7 @@ const Dashboard = () => {
         <div className="dashboardSummary">
           <div>
             <p>
-              Total Amount <br /> ₹12000
+              Total Amount <br /> ₹{totalAmount}
             </p>
           </div>
           <div className="dashboardSummaryBox2">
@@ -106,11 +106,11 @@ const Dashboard = () => {
             </Link>
             <Link to="/admin/orders">
               <p>Orders</p>
-              <p>4</p>
+              <p>{orders && orders.length}</p>
             </Link>
             <Link to="/admin/users">
               <p>Users</p>
-              <p>2</p>
+              {/* <p>{users && users.length}</p> */}
             </Link>
           </div>
         </div>

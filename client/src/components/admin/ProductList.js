@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import {
   clearErrors,
   getAdminProduct,
-  deleteProduct
+  deleteProduct,
 } from "../../actions/productAction";
 import { Link, useNavigate } from "react-router-dom";
 import { useAlert } from "react-alert";
@@ -23,7 +23,9 @@ const ProductList = () => {
 
   const { error, products } = useSelector((state) => state.products);
 
-  const { error: deleteError, isDeleted, } = useSelector((state) => state);
+  const { error: deleteError, isDeleted } = useSelector(
+    (state) => state.product
+  );
 
   const deleteProductHandler = (id) => {
     dispatch(deleteProduct(id));
@@ -36,7 +38,7 @@ const ProductList = () => {
     }
 
     if (deleteError) {
-      alert.error(isDeleted);
+      alert.error(deleteError);
       dispatch(clearErrors());
     }
 
@@ -47,7 +49,7 @@ const ProductList = () => {
     }
 
     dispatch(getAdminProduct());
-  }, [dispatch, alert, error, navigate, isDeleted, deleteError]);
+  }, [dispatch, alert, error, deleteError, navigate, isDeleted]);
 
   const columns = [
     { field: "id", headerName: "Product ID", minWidth: 200, flex: 0.5 },
