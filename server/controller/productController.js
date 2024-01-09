@@ -2,10 +2,31 @@ const Product = require("../models/productModel");
 const ErrorHndler = require("../utils/errorhandler");
 const catchAsyncError = require("../middleware/catchAsyncErrors");
 const ApiFeatures = require("../utils/apifeatures");
-
+const cloudinary = require("cloudinary");
 //create product
 exports.createProduct = catchAsyncError( async (req, res, next)=>{
+  let images = [];
 
+  if (typeof req.body.images === "string") {
+    images.push(req.body.images);
+  } else {
+    images = req.body.images;
+  }
+
+  const imagesLinks = [];
+
+  for (let i = 0; i < images.length; i++) {
+    const result = await cloudinary.v2.uploader.upload(images[i], {
+      folder: "products",
+    });
+
+    imagesLinks.push({
+      public_id: result.public_id,
+      url: result.secure_url,
+    });
+  }
+
+  req.body.images = imagesLinks;
     req.body.user = req.user.id;
     const product = await Product.create(req.body);
 
@@ -78,6 +99,37 @@ exports.updateProduct = catchAsyncError( async (req, res, next) =>{
         return next(new ErrorHndler("Product not dound", 404))
     }
 
+      // Images Start Here
+  let images = [];
+
+  if (typeof req.body.images === "string") {
+    images.push(req.body.images);
+  } else {
+    images = req.body.images;
+  }
+
+  if (images !== undefined) {
+    // Deleting Images From Cloudinary
+    for (let i = 0; i < product.images.length; i++) {
+      await cloudinary.v2.uploader.destroy(product.images[i].public_id);
+    }
+
+    const imagesLinks = [];
+
+    for (let i = 0; i < images.length; i++) {
+      const result = await cloudinary.v2.uploader.upload(images[i], {
+        folder: "products",
+      });
+
+      imagesLinks.push({
+        public_id: result.public_id,
+        url: result.secure_url,
+      });
+    }
+
+    req.body.images = imagesLinks;
+  }
+
     product = await Product.findByIdAndUpdate(req.params.id,req.body,{
         new:true,
         runValidators:true,
@@ -94,25 +146,23 @@ exports.updateProduct = catchAsyncError( async (req, res, next) =>{
 //Delete Product
 
 exports.deleteProduct = catchAsyncError( async (req, res, next) => {
-    try {
+    
         const product = await Product.findById(req.params.id);
 
         if(!product){
             return next(new ErrorHndler("Product not dound", 404))
         }
 
-        await product.deleteOne(); // Use deleteOne() instead of remove()
+        // Deleting Images From Cloudinary
+          for (let i = 0; i < product.images.length; i++) {
+            await cloudinary.v2.uploader.destroy(product.images[i].public_id);
+          }
+        await product.deleteOne();
 
         res.status(200).json({
             success: true,
             message: "Product deleted successfully"
         });
-    } catch (error) {
-        res.status(500).json({
-            success: false,
-            message: "Internal Server Error"
-        });
-    }
 });
 
 // Create New Review or Update the review
