@@ -253,6 +253,14 @@ exports.updateUserRole = catchAsyncErrors(async (req, res, next) => {
     role: req.body.role,
   };
 
+  let user = User.findById(req.params.id);
+
+  if(!user) {
+    return next (
+      new ErrorHndler(`Iser does not exist with id: ${req.params.id}`, 400)
+    )
+  }
+
   await User.findByIdAndUpdate(req.params.id, newUserData, {
     new: true,
     runValidators: true,
@@ -271,9 +279,12 @@ exports.updateUserRole = catchAsyncErrors(async (req, res, next) => {
 const user = await User.findById(req.params.id);
 
 if(!user){
-    return next(new ErrorHndler(`User does not exist with id: ${req.params.id}`));
+    return next(new ErrorHndler(`User does not exist with id: ${req.params.id}`, 400));
 }
 
+const imageId = user.avatar.public_id;
+
+await cloudinary.v2.uploader.destroy(imageId);
 await user.remove;
 
     res.status(200).json({

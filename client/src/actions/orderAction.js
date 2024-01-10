@@ -109,7 +109,9 @@ export const deleteOrder = (id) => async (dispatch) => {
 
     const { data } = await axios.delete(`/api/v1/admin/order/${id}`);
 
-    dispatch({ type: DELETE_ORDER_SUCCESS, payload: data.success });
+    dispatch({
+       type: DELETE_ORDER_SUCCESS,
+       payload: data.success });
   } catch (error) {
     dispatch({
       type: DELETE_ORDER_FAIL,
