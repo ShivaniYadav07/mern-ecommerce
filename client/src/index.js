@@ -7,24 +7,26 @@ import { Provider } from "react-redux";
 import store from "./Store";
 import { positions, transitions, Provider as AlertProvider } from "react-alert";
 import AlertTemplate from "react-alert-template-basic";
-import 'mdb-ui-kit/css/mdb.min.css';
+import 'mdb-react-ui-kit/dist/css/mdb.min.css';
+import "@fortawesome/fontawesome-free/css/all.min.css";
 
 const options = {
   timeout: 5000,
   positions: positions.BOTTOM_CENTER,
   transition: transitions.SCALE
 }
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <Provider store={store}>
-    <AlertProvider template={AlertTemplate} {...options}>
-    <React.StrictMode>
-        <ColorModeScript />
+const root = document.getElementById('root');
+ReactDOM.render(
+  <React.StrictMode>
+     <Provider store={store}>
+      <AlertProvider template={AlertTemplate} {...options}>
         <ChakraProvider theme={theme}>
+         <ColorModeScript />
           <ColorModeSwitcher />
           <App />
         </ChakraProvider>
-      </React.StrictMode>
-    </AlertProvider>
+      </AlertProvider>
   </Provider>
+      </React.StrictMode>,
+      root
 );

@@ -124,7 +124,7 @@ export default function App() {
       </div>
 
       <div className='text-center p-4' style={{ backgroundColor: 'rgba(0, 0, 0, 0.05)', color: fontColor }}>
-        © 2021 Copyright
+        © 2024 Copyright
         <a className='text-reset fw-bold' rel="noreferrer" target='_blank' href='https://shivaniyadav.online'>
           || Shivani Yadav
         </a>

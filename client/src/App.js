@@ -35,9 +35,11 @@ import ProcessOrder from "./components/admin/ProcessOrder.js"
 import UsersList from "./components/admin/UsersList.js"
 import UpdateUsers from "./components/admin/UpdateUsers.js"
 import ProductReviews from "./components/admin/ProductReviews.js"
+import NotFound from "./components/layout/NotFound/NotFound.js";
 import axios from 'axios';
 import { loadStripe } from '@stripe/stripe-js';
 import { Elements } from '@stripe/react-stripe-js';
+
 function App() {
 const {isAuthenticated, user} = useSelector((state) => state.user);
 const [stripeApiKey, setStripeApiKey] = useState("");
@@ -53,6 +55,7 @@ const [stripeApiKey, setStripeApiKey] = useState("");
        getStripeApiKey();
       }, [])
 
+      window.addEventListener("contextmenu", (e) => e.preventDefault());
   return (
     <Router>
       <Header />
@@ -73,7 +76,20 @@ const [stripeApiKey, setStripeApiKey] = useState("");
         <Route exact path="/cart" element={<Cart />} />
         <Route exact path='/shipping' element={<ProtectedRoute><Shipping /></ProtectedRoute>}/>
         
-        {stripeApiKey && ( <Route exact path='/process/payment' element={<Elements stripe={loadStripe(stripeApiKey)}><ProtectedRoute><Payment /></ProtectedRoute></Elements>}/>)}
+        {stripeApiKey && (
+            <Route
+              exact
+              path='/process/payment'
+              element={
+                <Elements stripe={loadStripe(stripeApiKey)}>
+                  <ProtectedRoute>
+                    <Payment />
+                  </ProtectedRoute>
+                </Elements>
+              }
+            />
+          )}
+
         <Route exact path='/success' element={<ProtectedRoute><OrderSuccess /></ProtectedRoute>}/>
         <Route exact path='/orders' element={<ProtectedRoute><MyOrders /></ProtectedRoute>}/>
         <Route exact path="/order/confirm" element={<ConfirmOrder />} />
@@ -88,6 +104,10 @@ const [stripeApiKey, setStripeApiKey] = useState("");
         <Route exact path='/admin/user/:id' element={<ProtectedRoute isAdmin={true}><UpdateUsers /></ProtectedRoute>}/>
         <Route exact path='/admin/reviews' element={<ProtectedRoute isAdmin={true}><ProductReviews /></ProtectedRoute>}/>
 
+        <Route
+
+          component = {<NotFound/>}
+        />
        </Routes>
       <Footer />
     </Router>
