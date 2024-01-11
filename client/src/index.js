@@ -15,8 +15,8 @@ const options = {
   positions: positions.BOTTOM_CENTER,
   transition: transitions.SCALE
 }
-const root = document.getElementById('root');
-ReactDOM.render(
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
   <React.StrictMode>
      <Provider store={store}>
       <AlertProvider template={AlertTemplate} {...options}>
@@ -27,6 +27,5 @@ ReactDOM.render(
         </ChakraProvider>
       </AlertProvider>
   </Provider>
-      </React.StrictMode>,
-      root
+      </React.StrictMode>
 );

@@ -103,11 +103,7 @@ const [stripeApiKey, setStripeApiKey] = useState("");
         <Route exact path='/admin/users' element={<ProtectedRoute isAdmin={true}><UsersList /></ProtectedRoute>}/>
         <Route exact path='/admin/user/:id' element={<ProtectedRoute isAdmin={true}><UpdateUsers /></ProtectedRoute>}/>
         <Route exact path='/admin/reviews' element={<ProtectedRoute isAdmin={true}><ProductReviews /></ProtectedRoute>}/>
-
-        <Route
-
-          component = {<NotFound/>}
-        />
+        <Route exact path='*' element = {<NotFound/>} />
        </Routes>
       <Footer />
     </Router>
