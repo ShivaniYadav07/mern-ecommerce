@@ -5,10 +5,12 @@ const bodyParser = require("body-parser");
 const fileUpload = require("express-fileupload");
 const errorMiddleware = require("./middleware/error");
 const path = require('path');
+const cors = require('cors')
 //config
 if(process.env.NODE_ENV!=="PRODUCTION"){
     require("dotenv").config({ path: 'server/config/config.env' });
   }
+app.use(cors({origin:"*", methods:"*"}))
 app.use(express.json())
 app.use(cookieParser());
 app.use(bodyParser.json({ limit: '50mb' }));

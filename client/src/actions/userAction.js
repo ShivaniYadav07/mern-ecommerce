@@ -1,3 +1,4 @@
+import { SERVER_ENDPOINT } from "../constants/apiEndpoint";
 import { 
     LOGIN_REQUEST,
     LOGIN_SUCCESS,
@@ -49,6 +50,7 @@ import {
     CLEAR_ERRORS
   } from "../constants/userConstants";
       import axios from "axios";
+      
 //Login
       export const login = (email, password) => async (dispatch) => {
         try {
@@ -57,7 +59,7 @@ import {
             const config = { headers: { "Content-Type": "application/json"}};
 
             const { data } = await axios.post(
-              `/api/v1/login`,
+              `${SERVER_ENDPOINT}/api/v1/login`,
               { email, password },
               config
             );
@@ -88,8 +90,16 @@ export const loadUser = () => async (dispatch) => {
     dispatch({ type: LOAD_USER_REQUEST });
 
     const { data } = await axios.get(`/api/v1/me`);
+    console.log(data)
+if(data.user){
+  
+  dispatch({ type: LOAD_USER_SUCCESS, payload: data.user });
+}
+else{
+  dispatch({ type: LOAD_USER_FAIL, payload: null });
 
-    dispatch({ type: LOAD_USER_SUCCESS, payload: data.user });
+}
+
   } catch (error) {
     dispatch({ type: LOAD_USER_FAIL, payload: error.response.data.message });
   }

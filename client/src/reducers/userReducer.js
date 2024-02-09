@@ -39,9 +39,11 @@ import { LOGIN_REQUEST,
     USER_DETAILS_FAIL,
       CLEAR_ERRORS} from "../constants/userConstants"
 
-      
+      const initialUser = {
+        user: null
+      }
 
-export const userReducer = (state = { user: [] }, action) => {
+export const userReducer = (state = initialUser, action) => {
     switch (action.type) {
         case LOGIN_REQUEST:
             case REGISTER_USER_REQUEST:

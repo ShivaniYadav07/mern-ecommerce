@@ -56,6 +56,7 @@ const [stripeApiKey, setStripeApiKey] = useState("");
       }, [])
 
       window.addEventListener("contextmenu", (e) => e.preventDefault());
+      console.log(isAuthenticated, user)
   return (
     <Router>
       <Header />

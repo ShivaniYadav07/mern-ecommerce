@@ -13,7 +13,12 @@ import { logout } from "../../../actions/userAction";
 import { useDispatch, useSelector } from "react-redux";
 
 const UserOptions = ({ user }) => {
+console.log(user)
   const { cartItems } = useSelector((state) => state.cart);
+  // if(!user){
+  //   return null;
+  // }
+
 
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
