@@ -36,11 +36,12 @@ const Dashboard = () => {
   const dispatch = useDispatch();
 
   const { products } = useSelector((state) => state.products);
+  console.log(products)
 
   const { orders } = useSelector((state) => state.allOrders);
-
+console.log(orders)
   const { users } = useSelector((state) => state.allUsers);
-
+console.log(users)
   let outOfStock = 0;
 
   products &&

@@ -12,7 +12,7 @@ import LoginSignup from "./components/User/LoginSignup"
 import UserOptions from "./components/layout/Header/UserOptions"
 import store from "./Store"
 import { loadUser } from './actions/userAction';
-import { useSelector } from 'react-redux';
+import {useSelector } from 'react-redux';
 import Profile from './components/User/Profile';
 import ProtectedRoute from "./components/Route/ProtectedRoute";
 import UpdateProfile from "./components/User/UpdateProfile";
@@ -39,13 +39,14 @@ import NotFound from "./components/layout/NotFound/NotFound.js";
 import axios from 'axios';
 import { loadStripe } from '@stripe/stripe-js';
 import { Elements } from '@stripe/react-stripe-js';
+import { SERVER_ENDPOINT } from './constants/apiEndpoint.js';
 
 function App() {
 const {isAuthenticated, user} = useSelector((state) => state.user);
 const [stripeApiKey, setStripeApiKey] = useState("");
 
       async function getStripeApiKey() {
-        const { data } = await axios.get("/api/v1/stripeapikey");
+        const { data } = await axios.get(`${SERVER_ENDPOINT}/api/v1/stripeapikey`);
 
         setStripeApiKey(data.stripeApiKey);
       }
