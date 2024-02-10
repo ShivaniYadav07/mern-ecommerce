@@ -31,6 +31,9 @@ app.use("/api/v1", payment);
 app.use(express.static(path.join(__dirname, "../client/build")));
 
 app.get("*", (req, res) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header('Access-Control-Allow-Credentials', true);
+
     res.sendFile(path.resolve(__dirname, "../client/build/index.html"))
 })
 //Middleware for Error

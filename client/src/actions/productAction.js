@@ -63,6 +63,7 @@ export const getAdminProduct = () => async (dispatch) => {
       headers:{
           Accept: 'application/json',
           'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*'
       },
       mode:'cors',
       credentials:'include',
