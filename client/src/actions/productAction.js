@@ -59,8 +59,16 @@ export const getProduct = (keyword = "", currentPage = 1, price = [0, 25000], ca
 export const getAdminProduct = () => async (dispatch) => {
   try {
     dispatch({ type: ADMIN_PRODUCT_REQUEST });
-
-    const { data } = await axios.get(`${SERVER_ENDPOINT}/api/v1/admin/products`, {withCredentials:true});
+    const config = {
+      headers:{
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+      },
+      mode:'cors',
+      credentials:'include',
+      withCredentials:true
+  }
+    const { data } = await axios.get(`${SERVER_ENDPOINT}/api/v1/admin/products`, config);
 
     dispatch({
       type: ADMIN_PRODUCT_SUCCESS,
