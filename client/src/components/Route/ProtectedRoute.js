@@ -7,12 +7,10 @@ const ProtectedRoute = ({ isAdmin, children }) => {
 
   if (loading === false) {
     if (isAuthenticated === false) {
-      console.log("Yes i am authenticated")
       return <Navigate to="/loginsignup" />;
     }
 
     if (isAdmin === true && user.role !== "admin") {
-      console.log("Yes i am admin");
       return <Navigate to="/loginsignup" />;
     }
 

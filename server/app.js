@@ -10,7 +10,7 @@ const cors = require('cors')
 if(process.env.NODE_ENV!=="PRODUCTION"){
     require("dotenv").config({ path: 'server/config/config.env' });
   }
-app.use(cors({origin:"*", methods:"*"}))
+app.use(cors({origin:"*", methods:"*", credentials: true}))
 app.use(express.json())
 app.use(cookieParser());
 app.use(bodyParser.json({ limit: '50mb' }));
