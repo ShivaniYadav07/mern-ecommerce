@@ -13,8 +13,9 @@ if (process.env.NODE_ENV !== "PRODUCTION") {
 app.use(
   cors({
     origin: ["https://mern-ecommerce-fc7df.web.app", "http://localhost:3000"],
-    methods: ["POST", "GET", "PUT", "PATCH", "DELETE", "OPTIONS"],
+    methods: "*",
     credentials: true,
+    // exposedHeaders: ["x-access-token"],
   })
 );
 app.use(cookieParser());
