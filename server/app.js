@@ -16,6 +16,7 @@ app.use(
     methods: "*",
     credentials: true,
     allowedHeaders: "*",
+    exposedHeaders: "*",
   })
 );
 app.use(cookieParser());
