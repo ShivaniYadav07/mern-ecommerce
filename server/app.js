@@ -12,7 +12,7 @@ if (process.env.NODE_ENV !== "PRODUCTION") {
 }
 app.use(
   cors({
-    origin: ["https://mern-ecommerce-fc7df.web.app/"],
+    origin: ["https://mern-ecommerce-fc7df.web.app", "http://localhost:3000"],
     methods: "*",
     credentials: true,
     allowedHeaders: "*",
