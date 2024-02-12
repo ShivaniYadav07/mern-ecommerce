@@ -15,6 +15,7 @@ app.use(
     origin: ["https://mern-ecommerce-fc7df.web.app", "http://localhost:3000"],
     methods: "*",
     credentials: true,
+    preflightContinue: true,
     allowedHeaders: "*",
   })
 );
