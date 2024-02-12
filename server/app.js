@@ -15,15 +15,6 @@ app.use(
     origin: ["https://mern-ecommerce-fc7df.web.app", "http://localhost:3000"],
     methods: ["POST", "GET", "PUT", "PATCH", "DELETE", "OPTIONS"],
     credentials: true,
-    allowHeaders: [
-      "X-Requested-With",
-      "X-HTTP-Method-Override",
-      "Content-Type",
-      "Authorization",
-      "Accept",
-      "Access-Control-Allow-Credentials",
-      "Access-Control-Allow-Origin",
-    ],
   })
 );
 app.use(cookieParser());
