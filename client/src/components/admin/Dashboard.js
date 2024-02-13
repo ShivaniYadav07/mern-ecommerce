@@ -7,15 +7,15 @@ import { Doughnut, Line } from "react-chartjs-2";
 // import { Chart } from 'react-chartjs-2';
 import "chart.js/auto";
 import {
-    Chart as ChartJS,
-    CategoryScale,
-    LinearScale,
-    PointElement,
-    LineElement,
-    Title,
-    Tooltip,
-    Legend,
-  } from 'chart.js'
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend,
+} from "chart.js";
 // import { useSelector } from "react-redux";
 import { useSelector, useDispatch } from "react-redux";
 import { getAdminProduct } from "../../actions/productAction";
@@ -23,25 +23,25 @@ import { getAllOrders } from "../../actions/orderAction.js";
 import { getAllUsers } from "../../actions/userAction.js";
 import MetaData from "../layout/MetaData";
 const Dashboard = () => {
-    ChartJS.register(
-        CategoryScale,
-        LinearScale,
-        PointElement,
-        LineElement,
-        Title,
-        Tooltip,
-        Legend
-      )
-    
+  ChartJS.register(
+    CategoryScale,
+    LinearScale,
+    PointElement,
+    LineElement,
+    Title,
+    Tooltip,
+    Legend
+  );
+
   const dispatch = useDispatch();
 
   const { products } = useSelector((state) => state.products);
-  console.log(products)
+  console.log(products);
 
   const { orders } = useSelector((state) => state.allOrders);
-console.log(orders)
+  console.log(orders);
   const { users } = useSelector((state) => state.allUsers);
-console.log(users)
+  console.log(users);
   let outOfStock = 0;
 
   products &&
@@ -81,7 +81,7 @@ console.log(users)
       {
         backgroundColor: ["#00A6B4", "#6800B4"],
         hoverBackgroundColor: ["#4B5000", "#35014F"],
-        data: [outOfStock, products.length - outOfStock],
+        data: [outOfStock, products?.length - outOfStock],
       },
     ],
   };

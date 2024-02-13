@@ -10,14 +10,10 @@ const cors = require("cors");
 if (process.env.NODE_ENV !== "PRODUCTION") {
   require("dotenv").config({ path: "server/config/config.env" });
 }
-// app.options("*", cors());
 app.use(
   cors({
-    origin: "https://mern-ecommerce-fc7df.web.app",
-    // methods: "*",
-    credentials: true,
-    // allowedHeaders: "*",
-    // exposedHeaders: "*",
+    origin: ["https://mern-ecommerce-fc7df.web.app", "http://localhost:3000"],
+    // credentials: true,
   })
 );
 app.use(cookieParser());
