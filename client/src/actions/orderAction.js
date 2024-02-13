@@ -21,6 +21,7 @@ import {
     CLEAR_ERRORS,
 } from "../constants/orderConstants";
 import axios from "axios";
+import { getAPITokenConfig } from "../constants/utilCookie";
 
 
 
@@ -67,7 +68,7 @@ export const getAllOrders = () => async (dispatch) => {
   try {
     dispatch({ type: ALL_ORDERS_REQUEST });
 
-    const { data } = await axios.get(`${SERVER_ENDPOINT}/api/v1/admin/orders`);
+    const { data } = await axios.get(`${SERVER_ENDPOINT}/api/v1/admin/orders`, getAPITokenConfig());
 
     dispatch({ type: ALL_ORDERS_SUCCESS, payload: data.orders });
   } catch (error) {
@@ -83,15 +84,16 @@ export const updateOrder = (id, order) => async (dispatch) => {
   try {
     dispatch({ type: UPDATE_ORDER_REQUEST });
 
-    const config = {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    };
+    // const config = {
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    // };
     const { data } = await axios.put(
       `${SERVER_ENDPOINT}/api/v1/admin/order/${id}`,
+      getAPITokenConfig(),
       order,
-      config
+      // config
     );
 
     dispatch({ type: UPDATE_ORDER_SUCCESS, payload: data.success });
@@ -108,7 +110,7 @@ export const deleteOrder = (id) => async (dispatch) => {
   try {
     dispatch({ type: DELETE_ORDER_REQUEST });
 
-    const { data } = await axios.delete(`${SERVER_ENDPOINT}/api/v1/admin/order/${id}`);
+    const { data } = await axios.delete(`${SERVER_ENDPOINT}/api/v1/admin/order/${id}`,getAPITokenConfig());
 
     dispatch({
        type: DELETE_ORDER_SUCCESS,

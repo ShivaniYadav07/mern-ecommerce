@@ -39,6 +39,7 @@ import {
 } from "../constants/userConstants";
 import axios from "axios";
 import { getCookie, setCookie } from "../constants/utilCookie";
+import { getAPITokenConfig } from "../constants/utilCookie";
 
 // Login
 export const login = (email, password) => async (dispatch) => {
@@ -209,7 +210,7 @@ export const resetPassword = (token, passwords) => async (dispatch) => {
 export const getAllUsers = () => async (dispatch) => {
   try {
     dispatch({ type: ALL_USERS_REQUEST });
-    const { data } = await axios.get(`${SERVER_ENDPOINT}/api/v1/admin/users`);
+    const { data } = await axios.get(`${SERVER_ENDPOINT}/api/v1/admin/users`, getAPITokenConfig());
 
     dispatch({ type: ALL_USERS_SUCCESS, payload: data.users });
   } catch (error) {
@@ -222,7 +223,7 @@ export const getUserDetails = (id) => async (dispatch) => {
   try {
     dispatch({ type: USER_DETAILS_REQUEST });
     const { data } = await axios.get(
-      `${SERVER_ENDPOINT}/api/v1/admin/user/${id}`
+      `${SERVER_ENDPOINT}/api/v1/admin/user/${id}`, getAPITokenConfig()
     );
 
     dispatch({ type: USER_DETAILS_SUCCESS, payload: data.user });
@@ -236,12 +237,13 @@ export const updateUser = (id, userData) => async (dispatch) => {
   try {
     dispatch({ type: UPDATE_USER_REQUEST });
 
-    const config = { headers: { "Content-Type": "application/json" } };
+    // const config = { headers: { "Content-Type": "application/json" } };
 
     const { data } = await axios.put(
       `${SERVER_ENDPOINT}/api/v1/admin/user/${id}`,
+      getAPITokenConfig(),
       userData,
-      config
+      // config
     );
 
     dispatch({ type: UPDATE_USER_SUCCESS, payload: data.success });
@@ -259,7 +261,8 @@ export const deleteUser = (id) => async (dispatch) => {
     dispatch({ type: DELETE_USER_REQUEST });
 
     const { data } = await axios.delete(
-      `${SERVER_ENDPOINT}/api/v1/admin/user/${id}`
+      `${SERVER_ENDPOINT}/api/v1/admin/user/${id}`,
+      getAPITokenConfig()
     );
 
     dispatch({

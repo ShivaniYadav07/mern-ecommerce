@@ -30,7 +30,7 @@ import {
   CLEAR_ERRORS,
 } from "../constants/productConstants";
 import { SERVER_ENDPOINT } from "../constants/apiEndpoint";
-import { getAPITokenConfig, getCookie } from "../constants/utilCookie";
+import { getAPITokenConfig } from "../constants/utilCookie";
 
 //getProducts
 export const getProduct =
@@ -83,14 +83,15 @@ export const createProduct = (productData) => async (dispatch) => {
   try {
     dispatch({ type: NEW_PRODUCT_REQUEST });
 
-    const config = {
-      headers: { "Content-Type": "application/json" },
-    };
+    // const config = {
+    //   headers: { "Content-Type": "application/json" },
+    // };
 
     const { data } = await axios.post(
       `${SERVER_ENDPOINT}/api/v1/admin/product/new`,
+      getAPITokenConfig(),
       productData,
-      config
+      // config
     );
 
     dispatch({
@@ -110,14 +111,15 @@ export const updateProduct = (id, productData) => async (dispatch) => {
   try {
     dispatch({ type: UPDATE_PRODUCT_REQUEST });
 
-    const config = {
-      headers: { "Content-Type": "application/json" },
-    };
+    // const config = {
+    //   headers: { "Content-Type": "application/json" },
+    // };
 
     const { data } = await axios.put(
       `${SERVER_ENDPOINT}/api/v1/admin/product/${id}`,
+      getAPITokenConfig(),
       productData,
-      config
+      // config
     );
 
     dispatch({
@@ -138,7 +140,8 @@ export const deleteProduct = (id) => async (dispatch) => {
     dispatch({ type: DELETE_PRODUCT_REQUEST });
 
     const { data } = await axios.delete(
-      `${SERVER_ENDPOINT}/api/v1/admin/product/${id}`
+      `${SERVER_ENDPOINT}/api/v1/admin/product/${id}`,
+      getAPITokenConfig()
     );
 
     dispatch({
