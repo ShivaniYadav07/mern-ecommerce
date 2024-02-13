@@ -13,7 +13,7 @@ if (process.env.NODE_ENV !== "PRODUCTION") {
 // app.options("*", cors());
 app.use(
   cors({
-    origin: "*",
+    origin: "https://mern-ecommerce-fc7df.web.app",
     // methods: "*",
     credentials: true,
     // allowedHeaders: "*",
