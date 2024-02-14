@@ -1,6 +1,6 @@
 import {createStore, combineReducers, applyMiddleware} from "redux";
 import {thunk} from "redux-thunk";
-import {composeWithDevTools} from "redux-devtools-extension/developmentOnly";
+import {composeWithDevTools} from "redux-devtools-extension";
 import { productsReducer, productDetailsReducer, newReviewReducer, newProductReducer, productReducer, productReviewsReducer, reviewReducer } from "./reducers/productReducer";
 import {allUsersReducer, forgotPasswordReducer, profileReducer, userDetailsReducer, userReducer} from "./reducers/userReducer";
 import { cartReducer } from "./reducers/cartReducer";
@@ -26,7 +26,6 @@ const reducer = combineReducers({
     productReviews: productReviewsReducer,
     review: reviewReducer,
 }
-// devTools: process.env.NODE_ENV !== 'production',
 );
 
 let initialState ={
@@ -42,6 +41,17 @@ let initialState ={
 
 const middleware = [thunk];
 
-const store = createStore(reducer, initialState, composeWithDevTools(applyMiddleware(...middleware)))
+let store;
 
+if (process.env.NODE_ENV === "development") {
+  // Development environment with Redux DevTools
+  store = createStore(
+    reducer,
+    initialState,
+    composeWithDevTools(applyMiddleware(...middleware))
+  );
+} else {
+  // Production environment without Redux DevTools
+  store = createStore(reducer, initialState, applyMiddleware(...middleware));
+}
 export default store;
