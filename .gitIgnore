@@ -11,7 +11,7 @@
 /client/build
 #misc
 
-/server/config/config.env
+server/config/config.env
 /client/.DS_Store
 /client/.env.development.local
 /client/.env.test.local
