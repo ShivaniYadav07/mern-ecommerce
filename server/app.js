@@ -7,9 +7,9 @@ const errorMiddleware = require("./middleware/error");
 const path = require("path");
 const cors = require("cors");
 //config
-if (process.env.NODE_ENV !== "PRODUCTION") {
-  require("dotenv").config({ path: "server/config/config.env" });
-}
+// if (process.env.NODE_ENV !== "PRODUCTION") {
+//   require("dotenv").config({ path: "server/config/config.env" });
+// }
 app.use(
   cors({
     origin: ["https://mern-ecommerce-fc7df.web.app", "http://localhost:3000"],
