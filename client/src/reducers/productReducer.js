@@ -147,7 +147,7 @@ export const newProductReducer = (state = { product: {} }, action) => {
     case NEW_PRODUCT_RESET:
       return {
         ...state,
-        success: false,
+        success: true,
       };
     case CLEAR_ERRORS:
       return {

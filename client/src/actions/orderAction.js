@@ -48,11 +48,13 @@ export const createOrder = (order) => async (dispatch) => {
 
   
 // My Orders
-export const myOrders = () => async (dispatch) => {
+export const myOrders = (order) => async (dispatch) => {
   try {
     dispatch({ type: MY_ORDERS_REQUEST });
 
-    const { data } = await axios.get(`${SERVER_ENDPOINT}/api/v1/orders/me`);
+    const { data } = await axios.get(`${SERVER_ENDPOINT}/api/v1/orders/me`,
+    getAPITokenConfig()
+  )
 
     dispatch({ type: MY_ORDERS_SUCCESS, payload: data.orders });
   } catch (error) {
@@ -68,7 +70,8 @@ export const getAllOrders = () => async (dispatch) => {
   try {
     dispatch({ type: ALL_ORDERS_REQUEST });
 
-    const { data } = await axios.get(`${SERVER_ENDPOINT}/api/v1/admin/orders`, getAPITokenConfig());
+    const { data } = await axios.get(`${SERVER_ENDPOINT}/api/v1/admin/orders`,
+    getAPITokenConfig());
 
     dispatch({ type: ALL_ORDERS_SUCCESS, payload: data.orders });
   } catch (error) {
@@ -91,8 +94,8 @@ export const updateOrder = (id, order) => async (dispatch) => {
     // };
     const { data } = await axios.put(
       `${SERVER_ENDPOINT}/api/v1/admin/order/${id}`,
-      getAPITokenConfig(),
       order,
+      getAPITokenConfig(),
       // config
     );
 

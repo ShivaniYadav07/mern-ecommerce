@@ -83,15 +83,10 @@ export const createProduct = (productData) => async (dispatch) => {
   try {
     dispatch({ type: NEW_PRODUCT_REQUEST });
 
-    // const config = {
-    //   headers: { "Content-Type": "application/json" },
-    // };
-
     const { data } = await axios.post(
       `${SERVER_ENDPOINT}/api/v1/admin/product/new`,
-      getAPITokenConfig(),
       productData,
-      // config
+      getAPITokenConfig()
     );
 
     dispatch({
@@ -106,6 +101,7 @@ export const createProduct = (productData) => async (dispatch) => {
   }
 };
 
+
 // Update Product
 export const updateProduct = (id, productData) => async (dispatch) => {
   try {
@@ -117,9 +113,8 @@ export const updateProduct = (id, productData) => async (dispatch) => {
 
     const { data } = await axios.put(
       `${SERVER_ENDPOINT}/api/v1/admin/product/${id}`,
-      getAPITokenConfig(),
       productData,
-      // config
+      getAPITokenConfig(),
     );
 
     dispatch({

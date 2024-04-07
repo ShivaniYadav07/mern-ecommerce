@@ -17,7 +17,7 @@ const ProtectedRoute = ({ isAdmin, children }) => {
     return <Fragment>{children}</Fragment>;
   }
 
-  return null; // Return null while loading is true
+  return null;
 };
 
 export default ProtectedRoute;
