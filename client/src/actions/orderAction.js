@@ -30,11 +30,6 @@ export const createOrder = (order) => async (dispatch) => {
     try {
       dispatch({ type: CREATE_ORDER_REQUEST });
   
-      // const config = {
-      //   headers: {
-      //     "Content-Type": "application/json",
-      //   },
-      // };
       const { data } = await axios.post(`${SERVER_ENDPOINT}/api/v1/order/new`, order,
       getAPITokenConfig(),
       );
@@ -57,7 +52,6 @@ export const MyOrder = () => async (dispatch) => {
     const { data } = await axios.get(`${SERVER_ENDPOINT}/api/v1/orders/me`,
     getAPITokenConfig()
   );
-  console.log("Data from backend:", data);
 
     dispatch({ type: MY_ORDERS_SUCCESS, payload: data.orders });
   } catch (error) {

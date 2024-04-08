@@ -30,7 +30,7 @@ const Header = () => {
     
       <Button
         pos={'fixed'}
-        top={'4'}
+        top={'5'}
         left={'4'}
         colorScheme="purple"
         p={'0'}
@@ -45,8 +45,8 @@ const Header = () => {
 
       <Button
         pos={'fixed'}
-        top={'4'}
-        right={'14'}
+        top={'5'}
+        right={'16'}
         colorScheme="purple"
         p={'0'}
         w={'10'}

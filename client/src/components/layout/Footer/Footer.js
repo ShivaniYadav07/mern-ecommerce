@@ -8,11 +8,15 @@ export default function App() {
   const { colorMode } = useColorMode();
 
   // Define a variable to store the background color based on the color mode
-  const footerBgColor = colorMode === 'current' ? 'current' : 'ghost';
+  // const footerBgColor = colorMode === 'current' ? 'current' : 'ghost';
   const fontColor = useColorModeValue('black', '#bfb1d9');
+  const homeBgColor =
+  colorMode === 'dark'
+    ? 'conic-gradient(from 45deg at 90% 0%, #050505, #1d1d37)'
+    : 'linear-gradient(to right, #565697, #bebef8)';
 
   return (
-    <MDBFooter bgColor={footerBgColor} color={fontColor} className='text-center  text-lg-start text-muted'>
+    <MDBFooter style={{ background: homeBgColor, color: fontColor }} className='text-center  text-lg-start text-muted'>
       <div style={{ position: 'relative' }}>
         {/* Image at the top with z-index -1 */}
         <Image
@@ -24,7 +28,7 @@ export default function App() {
             left: 0,
             width: '100%',
             height: '100%', // Ensure the image covers the entire footer
-            zIndex: -1, // Set z-index to -1 so that content appears on top
+            zIndex: 2, // Set z-index to -1 so that content appears on top
             objectFill: 'cover', // Maintain the aspect ratio without stretching
           }}
         />
@@ -40,7 +44,7 @@ export default function App() {
         </section>
 
         <section>
-          <MDBContainer className='text-center text-md-start mt-5'>
+          <MDBContainer className='text-center text-md-start mt-5' style={{ color: fontColor }}>
             <MDBRow className='mt-3'>
               <MDBCol md='3' lg='4' xl='3' className='mx-auto mb-4'>
                 <h6 className='text-uppercase fw-bold mb-4' style={{ color: fontColor }}>

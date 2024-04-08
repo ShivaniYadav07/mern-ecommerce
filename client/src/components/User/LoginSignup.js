@@ -8,11 +8,13 @@ import FaceIcon from "@material-ui/icons/Face";
 import { useDispatch, useSelector } from "react-redux";
 import { clearErrors, login, register } from "../../actions/userAction";
 import { useAlert } from "react-alert";
+import { useColorMode, useColorModeValue } from '@chakra-ui/react';
 
 const LoginSignUp = ({ location }) => {
   const dispatch = useDispatch();
   const alert = useAlert();
   const navigate = useNavigate();
+  const  {colorMode}  = useColorMode();
   const { error, loading, isAuthenticated } = useSelector(
     (state) => state.user
   );
@@ -29,7 +31,11 @@ const LoginSignUp = ({ location }) => {
     email: "",
     password: "",
   });
-
+  const fontColor = useColorModeValue('black', '#bfb1d9');
+  const homeBgColor =
+  colorMode === 'dark'
+    ? 'conic-gradient(from 45deg at 90% 0%, #050505, #1d1d37)'
+    : 'linear-gradient(to right, #565697, #bebef8)';
   const { name, email, password } = user;
 
   const [avatar, setAvatar] = useState("/Profile.png");
@@ -105,10 +111,10 @@ const LoginSignUp = ({ location }) => {
         <Loader />
       ) : (
         <Fragment>
-          <div className="LoginSignUpContainer">
-            <div className="LoginSignUpBox">
-              <div>
-                <div className="login_signUp_toggle">
+          <div className="LoginSignUpContainer"  style={{ background: homeBgColor, color: fontColor }}>
+            <div className="LoginSignUpBox"  style={{ background: homeBgColor, color: fontColor }}>
+              <div >
+                <div className="login_signUp_toggle" style={{ color: fontColor }}>
                   <p onClick={(e) => switchTabs(e, "login")}>LOGIN</p>
                   <p onClick={(e) => switchTabs(e, "register")}>REGISTER</p>
                 </div>

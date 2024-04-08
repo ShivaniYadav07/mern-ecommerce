@@ -96,6 +96,7 @@ export const loadUser = () => async (dispatch) => {
       dispatch({ type: LOAD_USER_SUCCESS, payload: user });
     } else {
       const { data } = await axios.get(`${SERVER_ENDPOINT}/api/v1/me`,
+      getAPITokenConfig(),
   );
       if (data.user) {
         dispatch({ type: LOAD_USER_SUCCESS, payload: data.user });

@@ -18,7 +18,6 @@ import "./processOrder.css";
 
 const ProcessOrder = () => {
     const params = useParams();
-    // const navigate = useNavigate();
   const { order, error, loading } = useSelector((state) => state.orderDetails);
   const { error: updateError, isUpdated } = useSelector((state) => state.order);
 

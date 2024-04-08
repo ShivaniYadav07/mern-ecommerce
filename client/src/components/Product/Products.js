@@ -11,6 +11,7 @@ import Typography from "@material-ui/core/Typography";
 import MetaData from "../layout/MetaData";
 // import { useColorModeValue } from '@chakra-ui/react';
 import { useParams } from 'react-router-dom';
+import { useColorMode, useColorModeValue } from '@chakra-ui/react';
 
 
 const categories = [
@@ -24,6 +25,7 @@ const categories = [
 ];
 
 const Products = () => {
+  const { colorMode } = useColorMode();
   const dispatch = useDispatch();
   let params = useParams();
 
@@ -64,6 +66,11 @@ const Products = () => {
     dispatch(getProduct(keyword, currentPage, price, category, ratings));
   }, [dispatch, keyword, currentPage, price, category, ratings, alert, error]);
 
+  const fontColor = useColorModeValue('black', '#bfb1d9');
+  const homeBgColor =
+  colorMode === 'dark'
+    ? 'conic-gradient(from 45deg at 90% 0%, #050505, #1d1d37)'
+    : 'linear-gradient(to right, #565697, #bebef8)';
   // const fontColor = useColorModeValue('black', '#bfb1d9');
   return (
     <Fragment>
@@ -72,16 +79,16 @@ const Products = () => {
       ) : (
         <Fragment>
         <MetaData title="PRODUCTS -- ECOMMERCE" />
-        <h2 className="productsHeading">Products</h2>
+        <h2 className="productsHeading"  style={{ background: homeBgColor, color: fontColor }}>Products</h2>
 
-        <div className="products">
+        <div className="products"  style={{ background: homeBgColor, color: fontColor }}>
           {products &&
             products.map((product) => (
               <ProductCard key={product._id} product={product} />
             ))}
         </div>
 
-        <div className="filterBox">
+        <div className="filterBox" style={{ color: fontColor }}>
           <Typography>Price</Typography>
           <Slider
             value={price}
@@ -99,6 +106,7 @@ const Products = () => {
                 className="category-link"
                 key={category}
                 onClick={() => setCategory(category)}
+                style={{ color: fontColor }}
               >
                 {category}
               </li>

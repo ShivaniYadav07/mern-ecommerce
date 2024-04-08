@@ -1,6 +1,22 @@
 .banner{
     background-image: linear-gradient(to right, #565697, #bebef8);
     height: 100vmin;
+    position: relative;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    color: white;
+
+
+}
+.banner_2{
+    background-image: linear-gradient(to right, #565697, #bebef8);
+    height: auto;
+    position: relative;
+    top: 0;
     display: flex;
     flex-direction: column;
     text-align: center;
@@ -8,7 +24,6 @@
     justify-content: center;
     color: white;
 }
-
 .banner >h1{
     margin: 5vmax;
     font: 600 2.5vmax "Roboto";
@@ -37,13 +52,10 @@ element.style::before {
     text-align: center;
     font-family: Roboto;
     font-size: 1.4vmax;
-    border-bottom: 1px solid rgba(21, 21, 21, 0.5);
-    width: 20vmax;
-    padding: 1vmax;
-    margin: 5vmax auto;
+    /* border-bottom: 1px solid rgba(21, 21, 21, 0.5); */
     color: rgb(0, 0, 0, 0.7);
+    margin: 0;
 }
-
 .productCard{
     width: 14vmax;
     display: flex;

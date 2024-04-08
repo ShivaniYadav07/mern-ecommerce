@@ -2,7 +2,8 @@ import React, { Fragment, useEffect } from "react";
 import { DataGrid } from "@material-ui/data-grid";
 import "./myOrders.css";
 import { useSelector, useDispatch } from "react-redux";
-import { clearErrors, MyOrder } from "../../actions/orderAction";
+import { clearErrors,
+  getAllOrders } from "../../actions/orderAction";
 import Loader from "../layout/Loader/Loader";
 import { Link } from "react-router-dom";
 import { useAlert } from "react-alert";
@@ -15,7 +16,7 @@ const MyOrders = () => {
 
   const alert = useAlert();
 
-  const { loading, error, orders } = useSelector((state) => state.myOrders);
+  const { loading, error, orders } = useSelector((state) => state.allOrders);
   const { user } = useSelector((state) => state.user);
 
   const columns = [
@@ -75,7 +76,6 @@ const MyOrders = () => {
         amount: item.totalPrice,
       });
     });
-    console.log("myorders:", orders)
 
   useEffect(() => {
     if (error) {
@@ -83,7 +83,7 @@ const MyOrders = () => {
       dispatch(clearErrors());
     }
 
-    dispatch(MyOrder());
+    dispatch(getAllOrders());
   }, [dispatch, alert, error]);
 
   return (
