@@ -11,47 +11,54 @@ import ListAltIcon from "@material-ui/icons/ListAlt";
 import DashboardIcon from "@material-ui/icons/Dashboard";
 import PeopleIcon from "@material-ui/icons/People";
 import RateReviewIcon from "@material-ui/icons/RateReview";
+import { useColorMode, useColorModeValue } from '@chakra-ui/react';
 
 const Sidebar = () => {
+  const { colorMode } = useColorMode();
+
+  const homeBgColor =
+    colorMode === 'dark'
+      ? 'conic-gradient(from 45deg at 90% 0%, #050505, #1d1d37)'
+      : 'linear-gradient(to right, #565697, #bebef8)';
+  const fontColor = useColorModeValue('black', '#bfb1d9');
   return (
-    <div className="sidebar">
+    <div className="sidebar" style={{ background: homeBgColor, color: fontColor }}>
       <Link to="/">
-        {/* <img src={logo} alt="Ecommerce" /> */}
       </Link>
       <Link to="/admin/dashboard">
-        <p>
+        <p style={{ color: fontColor }}>
           <DashboardIcon /> Dashboard
         </p>
       </Link>
       <Link>
         <TreeView
           defaultCollapseIcon={<ExpandMoreIcon />}
-          defaultExpandIcon={<ImportExportIcon />}
+          defaultExpandIcon={<ImportExportIcon />} 
         >
-          <TreeItem nodeId="1" label="Products">
-            <Link to="/admin/products">
-              <TreeItem nodeId="2" label="All" icon={<PostAddIcon />} />
+          <TreeItem nodeId="1" label="Products" style={{ background: homeBgColor, color: fontColor }}  >
+            <Link to="/admin/products" >
+              <TreeItem nodeId="2" label="All" icon={<PostAddIcon />} style={{ color: fontColor }}  />
             </Link>
 
             <Link to="/admin/product">
-              <TreeItem nodeId="3" label="Create" icon={<AddIcon />} />
+              <TreeItem nodeId="3" label="Create" icon={<AddIcon />} style={{ color: fontColor }}/>
             </Link>
           </TreeItem>
         </TreeView>
       </Link>
       <Link to="/admin/orders">
-        <p>
+        <p style={{ color: fontColor }}>
           <ListAltIcon />
           Orders
         </p>
       </Link>
       <Link to="/admin/users">
-        <p>
+        <p style={{ color: fontColor }}>
           <PeopleIcon /> Users
         </p>
       </Link>
       <Link to="/admin/reviews">
-        <p>
+        <p style={{ color: fontColor }}>
           <RateReviewIcon />
           Reviews
         </p>

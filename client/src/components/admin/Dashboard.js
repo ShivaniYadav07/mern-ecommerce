@@ -22,6 +22,7 @@ import { getAdminProduct } from "../../actions/productAction";
 import { getAllOrders } from "../../actions/orderAction.js";
 import { getAllUsers } from "../../actions/userAction.js";
 import MetaData from "../layout/MetaData";
+import { useColorMode, useColorModeValue } from '@chakra-ui/react';
 const Dashboard = () => {
   ChartJS.register(
     CategoryScale,
@@ -32,7 +33,13 @@ const Dashboard = () => {
     Tooltip,
     Legend
   );
+  const { colorMode } = useColorMode();
 
+  const homeBgColor =
+    colorMode === 'dark'
+      ? 'conic-gradient(from 45deg at 90% 0%, #050505, #1d1d37)'
+      : 'linear-gradient(to right, #565697, #bebef8)';
+  const fontColor = useColorModeValue('black', '#bfb1d9');
   const dispatch = useDispatch();
 
   const { products } = useSelector((state) => state.products);
@@ -88,16 +95,16 @@ const Dashboard = () => {
       <MetaData title="Dashboard - Admin Panel" />
       <Sidebar />
 
-      <div className="dashboardContainer">
-        <Typography component="h1">Dashboard</Typography>
+      <div className="dashboardContainer" style={{ background: homeBgColor, color: fontColor }}>
+        <Typography component="h1" style={{ background: homeBgColor, color: fontColor }}>Dashboard</Typography>
 
         <div className="dashboardSummary">
-          <div>
+          <div style={{ background: homeBgColor, color: fontColor }}>
             <p>
               Total Amount <br /> ₹{totalAmount}
             </p>
           </div>
-          <div className="dashboardSummaryBox2">
+          <div className="dashboardSummaryBox2" style={{ background: homeBgColor, color: fontColor }}>
             <Link to="/admin/products">
               <p>Product</p>
               <p>{products && products.length}</p>
@@ -114,7 +121,7 @@ const Dashboard = () => {
         </div>
 
         <div className="lineChart">
-          <Line data={lineState} />
+          <Line data={lineState} style={{ background: homeBgColor, color: fontColor }} />
         </div>
 
         <div className="doughnutChart">
