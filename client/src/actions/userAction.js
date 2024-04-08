@@ -53,7 +53,8 @@ export const login = (email, password) => async (dispatch) => {
     const { data } = await axios.post(
       `${SERVER_ENDPOINT}/api/v1/login`,
       { email, password },
-      config
+      config,
+      
     );
 
     localStorage.setItem("userData", JSON.stringify(data.user));
@@ -94,8 +95,8 @@ export const loadUser = () => async (dispatch) => {
     if (user && userCookie) {
       dispatch({ type: LOAD_USER_SUCCESS, payload: user });
     } else {
-      const { data } = await axios.get(`${SERVER_ENDPOINT}/api/v1/me`);
-      console.log(data);
+      const { data } = await axios.get(`${SERVER_ENDPOINT}/api/v1/me`,
+  );
       if (data.user) {
         dispatch({ type: LOAD_USER_SUCCESS, payload: data.user });
       } else {
@@ -128,7 +129,8 @@ export const updateProfile = (userData) => async (dispatch) => {
     const { data } = await axios.put(
       `${SERVER_ENDPOINT}/api/v1/me/update`,
       userData,
-      config
+      getAPITokenConfig(),
+      config,
     );
 
     dispatch({ type: UPDATE_PROFILE_SUCCESS, payload: data.success });
@@ -241,8 +243,8 @@ export const updateUser = (id, userData) => async (dispatch) => {
 
     const { data } = await axios.put(
       `${SERVER_ENDPOINT}/api/v1/admin/user/${id}`,
-      getAPITokenConfig(),
       userData,
+      getAPITokenConfig(),
       // config
     );
 

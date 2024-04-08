@@ -30,12 +30,14 @@ export const createOrder = (order) => async (dispatch) => {
     try {
       dispatch({ type: CREATE_ORDER_REQUEST });
   
-      const config = {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      };
-      const { data } = await axios.post(`${SERVER_ENDPOINT}/api/v1/order/new`, order, config);
+      // const config = {
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //   },
+      // };
+      const { data } = await axios.post(`${SERVER_ENDPOINT}/api/v1/order/new`, order,
+      getAPITokenConfig(),
+      );
   
       dispatch({ type: CREATE_ORDER_SUCCESS, payload: data });
     } catch (error) {
@@ -48,13 +50,14 @@ export const createOrder = (order) => async (dispatch) => {
 
   
 // My Orders
-export const myOrders = (order) => async (dispatch) => {
+export const MyOrder = () => async (dispatch) => {
   try {
     dispatch({ type: MY_ORDERS_REQUEST });
 
     const { data } = await axios.get(`${SERVER_ENDPOINT}/api/v1/orders/me`,
     getAPITokenConfig()
-  )
+  );
+  console.log("Data from backend:", data);
 
     dispatch({ type: MY_ORDERS_SUCCESS, payload: data.orders });
   } catch (error) {
@@ -94,8 +97,8 @@ export const updateOrder = (id, order) => async (dispatch) => {
     // };
     const { data } = await axios.put(
       `${SERVER_ENDPOINT}/api/v1/admin/order/${id}`,
-      order,
       getAPITokenConfig(),
+      order,
       // config
     );
 
@@ -113,7 +116,9 @@ export const deleteOrder = (id) => async (dispatch) => {
   try {
     dispatch({ type: DELETE_ORDER_REQUEST });
 
-    const { data } = await axios.delete(`${SERVER_ENDPOINT}/api/v1/admin/order/${id}`,getAPITokenConfig());
+    const { data } = await axios.delete(`${SERVER_ENDPOINT}/api/v1/admin/order/${id}`,
+    getAPITokenConfig()
+  );
 
     dispatch({
        type: DELETE_ORDER_SUCCESS,
@@ -131,13 +136,17 @@ export const getOrderDetails = (id) => async (dispatch) => {
   try {
     dispatch({ type: ORDER_DETAILS_REQUEST });
 
-    const { data } = await axios.get(`${SERVER_ENDPOINT}/api/v1/order/${id}`);
+    // Fetch order details with authentication token
+    const { data } = await axios.get(
+      `${SERVER_ENDPOINT}/api/v1/order/${id}`,
+      getAPITokenConfig() // Pass authentication token
+    );
 
     dispatch({ type: ORDER_DETAILS_SUCCESS, payload: data.order });
   } catch (error) {
     dispatch({
       type: ORDER_DETAILS_FAIL,
-      payload: error.response.data.message,
+      payload: error.response.data.message
     });
   }
 };

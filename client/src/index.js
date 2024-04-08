@@ -17,7 +17,7 @@ const options = {
 }
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
+  // <React.StrictMode>
      <Provider store={store}>
       <AlertProvider template={AlertTemplate} {...options}>
         <ChakraProvider theme={theme}>
@@ -27,5 +27,5 @@ root.render(
         </ChakraProvider>
       </AlertProvider>
   </Provider>
-      </React.StrictMode>
+      // </React.StrictMode>
 );

@@ -32,9 +32,10 @@ const ConfirmOrder = () => {
     };
 
     sessionStorage.setItem("orderInfo", JSON.stringify(data));
-
+    
     navigate("/process/payment");
   };
+  
 
   return (
     <Fragment>

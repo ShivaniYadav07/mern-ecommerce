@@ -41,7 +41,7 @@ import { LOGIN_REQUEST,
 
       
 
-export const userReducer = (state = {user: {}}, action) => {
+export const userReducer = (state = {isAuthenticated: false, user: {}}, action) => {
     switch (action.type) {
         case LOGIN_REQUEST:
             case REGISTER_USER_REQUEST:

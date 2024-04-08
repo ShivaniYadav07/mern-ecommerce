@@ -9,7 +9,7 @@ import Slider from "@material-ui/core/Slider";
 import { useAlert } from "react-alert";
 import Typography from "@material-ui/core/Typography";
 import MetaData from "../layout/MetaData";
-import { useColorModeValue } from '@chakra-ui/react';
+// import { useColorModeValue } from '@chakra-ui/react';
 import { useParams } from 'react-router-dom';
 
 
@@ -64,83 +64,80 @@ const Products = () => {
     dispatch(getProduct(keyword, currentPage, price, category, ratings));
   }, [dispatch, keyword, currentPage, price, category, ratings, alert, error]);
 
-  const fontColor = useColorModeValue('black', '#bfb1d9');
+  // const fontColor = useColorModeValue('black', '#bfb1d9');
   return (
     <Fragment>
       {loading ? (
         <Loader />
       ) : (
         <Fragment>
-          <MetaData title="PRODUCTS -- ECOMMERCE" />
-          <h2 className="productsHeading" style={{color: fontColor }}>Products</h2>
+        <MetaData title="PRODUCTS -- ECOMMERCE" />
+        <h2 className="productsHeading">Products</h2>
 
-          <div className="products">
-            {products &&
-              products.map((product) => (
-                <ProductCard key={product._id} product={product} />
-              ))}
+        <div className="products">
+          {products &&
+            products.map((product) => (
+              <ProductCard key={product._id} product={product} />
+            ))}
+        </div>
+
+        <div className="filterBox">
+          <Typography>Price</Typography>
+          <Slider
+            value={price}
+            onChange={priceHandler}
+            valueLabelDisplay="auto"
+            aria-labelledby="range-slider"
+            min={0}
+            max={25000}
+          />
+
+          <Typography>Categories</Typography>
+          <ul className="categoryBox">
+            {categories.map((category) => (
+              <li
+                className="category-link"
+                key={category}
+                onClick={() => setCategory(category)}
+              >
+                {category}
+              </li>
+            ))}
+          </ul>
+
+          <fieldset>
+            <Typography component="legend">Ratings Above</Typography>
+            <Slider
+              value={ratings}
+              onChange={(e, newRating) => {
+                setRatings(newRating);
+              }}
+              aria-labelledby="continuous-slider"
+              valueLabelDisplay="auto"
+              min={0}
+              max={5}
+            />
+          </fieldset>
+        </div>
+        {resultPerPage < count && (
+          <div className="paginationBox">
+            <Pagination
+              activePage={currentPage}
+              itemsCountPerPage={resultPerPage}
+              totalItemsCount={productsCount}
+              onChange={setCurrentPageNo}
+              nextPageText="Next"
+              prevPageText="Prev"
+              firstPageText="1st"
+              lastPageText="Last"
+              itemClass="page-item"
+              linkClass="page-link"
+              activeClass="pageItemActive"
+              activeLinkClass="pageLinkActive"
+            />
           </div>
-{keyword && (
-    
-    <div className="filterBox">
-    <Typography>Price</Typography>
-    <Slider
-      value={price}
-      onChange={priceHandler}
-      valueLabelDisplay="auto"
-      aria-labelledby="range-slider"
-      min={0}
-      max={25000}
-    />
-
-    <Typography>Categories</Typography>
-    <ul className="categoryBox">
-      {categories.map((category) => (
-        <li
-          className="category-link"
-          key={category}
-          onClick={() => setCategory(category)}
-          style={{ color: fontColor }}
-        >
-          {category}
-        </li>
-      ))}
-    </ul>
-
-    <fieldset>
-    <Typography component="legend">Ratings Above</Typography>
-      <Slider
-        value={ratings}
-        onChange={(e, newRating) => {
-          setRatings(newRating);
-        }}
-        aria-labelledby="continuous-slider"
-        valueLabelDisplay="auto"
-        min={0}
-        max={5}
-      />
-    </fieldset>
-  </div>
-)}
-          {resultPerPage < count && (
-            <div className="paginationBox">
-              <Pagination
-                activePage={currentPage}
-                itemsCountPerPage={resultPerPage}
-                totalItemsCount={productsCount}
-                onChange={setCurrentPageNo}
-                nextPageText="Next"
-                prevPageText="Prev"
-                firstPageText="1st"
-                lastPageText="Last"
-                itemClass="page-item"
-                linkClass="page-link"
-                activeClass="pageItemActive"
-                activeLinkClass="pageLinkActive"
-              />
-            </div>
-          )}
-        </Fragment>
+        )}
+      </Fragment>
       )}
     </Fragment>
   );

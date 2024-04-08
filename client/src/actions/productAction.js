@@ -39,11 +39,12 @@ export const getProduct =
     try {
       dispatch({ type: ALL_PRODUCT_REQUEST });
 
-      let link = `${SERVER_ENDPOINT}/api/v1/products?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&ratings[gte]=${ratings}`;
+      let link = `/api/v1/products?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&ratings[gte]=${ratings}`;
 
       if (category) {
-        link = `${SERVER_ENDPOINT}/api/v1/products?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&category=${category}&ratings[gte]=${ratings}`;
+        link = `/api/v1/products?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&category=${category}&ratings[gte]=${ratings}`;
       }
+
       const { data } = await axios.get(link);
 
       dispatch({
@@ -53,7 +54,7 @@ export const getProduct =
     } catch (error) {
       dispatch({
         type: ALL_PRODUCT_FAIL,
-        payload: error.response ? error.response.data.message : "Network error",
+        payload: error.response.data.message,
       });
     }
   };
@@ -175,14 +176,14 @@ export const newReview = (reviewData) => async (dispatch) => {
   try {
     dispatch({ type: NEW_REVIEW_REQUEST });
 
-    const config = {
-      headers: { "Content-Type": "application/json" },
-    };
+    // const config = {
+    //   headers: { "Content-Type": "application/json" },
+    // };
 
     const { data } = await axios.put(
       `${SERVER_ENDPOINT}/api/v1/review`,
       reviewData,
-      config
+      getAPITokenConfig(),
     );
 
     dispatch({

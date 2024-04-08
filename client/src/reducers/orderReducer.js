@@ -113,6 +113,8 @@ export const newOrderReducer = (state = {}, action) => {
     }
   };
   
+  
+  
   export const orderReducer = (state = {}, action) => {
     switch (action.type) {
       case UPDATE_ORDER_REQUEST:

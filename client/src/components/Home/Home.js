@@ -72,7 +72,7 @@ const Home = ({ products: propProducts }) => {
       </div>
       <h2 className='homeHeading' style={{color: fontColor }}>Featured Products</h2>
       <div className='container' id='container' style={{ color: fontColor }}>
-      <SimpleGrid columns={[2, null, 4]} spacing='40px'>
+      <SimpleGrid columns={[2, 4]} spacing='40px'>
         {products && products.map((product) => (
           <ProductCard product={product} key={product._id} />
         ))}

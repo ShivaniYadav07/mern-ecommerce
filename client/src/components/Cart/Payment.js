@@ -19,6 +19,8 @@ import CreditCardIcon from "@material-ui/icons/CreditCard";
 import EventIcon from "@material-ui/icons/Event";
 import VpnKeyIcon from "@material-ui/icons/VpnKey";
 import { createOrder, clearErrors } from "../../actions/orderAction";
+import { getAPITokenConfig } from "../../constants/utilCookie";
+import { SERVER_ENDPOINT } from "../../constants/apiEndpoint";
 
 const Payment = () => {
   const orderInfo = JSON.parse(sessionStorage.getItem("orderInfo"));
@@ -53,15 +55,10 @@ const Payment = () => {
     payBtn.current.disabled = true;
 
     try {
-      const config = {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      };
       const response = await axios.post(
-        "/api/v1/payment/process",
+        `${SERVER_ENDPOINT}/api/v1/process/payment`,
         paymentData,
-        config
+        getAPITokenConfig(),
       );
       
       const data = response.data;

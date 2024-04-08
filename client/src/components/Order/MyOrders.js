@@ -2,7 +2,7 @@ import React, { Fragment, useEffect } from "react";
 import { DataGrid } from "@material-ui/data-grid";
 import "./myOrders.css";
 import { useSelector, useDispatch } from "react-redux";
-import { clearErrors, myOrders } from "../../actions/orderAction";
+import { clearErrors, MyOrder } from "../../actions/orderAction";
 import Loader from "../layout/Loader/Loader";
 import { Link } from "react-router-dom";
 import { useAlert } from "react-alert";
@@ -67,7 +67,7 @@ const MyOrders = () => {
   const rows = [];
 
   orders &&
-    orders.forEach((item, index) => {
+    orders.forEach((item) => {
       rows.push({
         itemsQty: item.orderItems.length,
         id: item._id,
@@ -75,6 +75,7 @@ const MyOrders = () => {
         amount: item.totalPrice,
       });
     });
+    console.log("myorders:", orders)
 
   useEffect(() => {
     if (error) {
@@ -82,7 +83,7 @@ const MyOrders = () => {
       dispatch(clearErrors());
     }
 
-    dispatch(myOrders());
+    dispatch(MyOrder());
   }, [dispatch, alert, error]);
 
   return (
