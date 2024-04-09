@@ -17,7 +17,7 @@
   
   .shippingHeading {
     text-align: center;
-    color: rgba(0, 0, 0, 0.664);
+    /* color: rgba(0, 0, 0, 0.664); */
     font: 400 1.3vmax "Roboto";
     padding: 1.3vmax;
     border-bottom: 1px solid rgba(0, 0, 0, 0.205);
@@ -58,7 +58,7 @@
     position: absolute;
     transform: translateX(1vmax);
     font-size: 1.6vmax;
-    color: rgba(0, 0, 0, 0.623);
+    /* color: rgba(0, 0, 0, 0.623); */
   }
   
   .shippingBtn {

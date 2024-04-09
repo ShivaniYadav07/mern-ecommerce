@@ -106,7 +106,7 @@ const Cart = () => {
               </div>
               <div></div>
               <div className="checkOutBtn">
-                <button onClick={checkoutHandler} style={{ color: fontColor }}>Check Out</button>
+                <button onClick={checkoutHandler}>Check Out</button>
               </div>
             </div>
           </div>

@@ -5,11 +5,19 @@ import MetaData from "../layout/MetaData";
 import "./ConfirmOrder.css";
 import { Link, useNavigate } from "react-router-dom";
 import { Typography } from "@material-ui/core";
+import { useColorMode, useColorModeValue } from '@chakra-ui/react';
 
 const ConfirmOrder = () => {
   const { shippingInfo, cartItems } = useSelector((state) => state.cart);
   const { user } = useSelector((state) => state.user);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const { colorMode } = useColorMode();
+
+  const homeBgColor =
+    colorMode === 'dark'
+      ? 'conic-gradient(from 45deg at 90% 0%, #050505, #1d1d37)'
+      : 'linear-gradient(to right, #565697, #bebef8)';
+  const fontColor = useColorModeValue('black', '#bfb1d9');
   const subtotal = cartItems.reduce(
     (acc, item) => acc + item.quantity * item.price,
     0
@@ -41,22 +49,22 @@ const ConfirmOrder = () => {
     <Fragment>
       <MetaData title="Confirm Order" />
       <CheckoutSteps activeStep={1} />
-      <div className="confirmOrderPage">
+      <div className="confirmOrderPage"  style={{ background: homeBgColor, color: fontColor }}>
         <div>
           <div className="confirmshippingArea">
             <Typography>Shipping Info</Typography>
             <div className="confirmshippingAreaBox">
               <div>
-                <p>Name:</p>
-                <span>{user.name}</span>
+                <p style={{ color: fontColor }}>Name:</p>
+                <span style={{ color: fontColor }}>{user.name}</span>
               </div>
               <div>
-                <p>Phone:</p>
-                <span>{shippingInfo.phoneNo}</span>
+                <p style={{ color: fontColor }}>Phone:</p>
+                <span style={{ color: fontColor }}>{shippingInfo.phoneNo}</span>
               </div>
               <div>
-                <p>Address:</p>
-                <span>{address}</span>
+                <p style={{ color: fontColor }}>Address:</p>
+                <span style={{ color: fontColor }}>{address}</span>
               </div>
             </div>
           </div>
@@ -67,10 +75,10 @@ const ConfirmOrder = () => {
                 cartItems.map((item) => (
                   <div key={item.product}>
                     <img src={item.image} alt="Product" />
-                    <Link to={`/product/${item.product}`}>
+                    <Link to={`/product/${item.product}`} style={{ color: fontColor }}>
                       {item.name}
                     </Link>{" "}
-                    <span>
+                    <span style={{ color: fontColor }}>
                       {item.quantity} X ₹{item.price} ={" "}
                       <b>₹{item.price * item.quantity}</b>
                     </span>
@@ -82,7 +90,7 @@ const ConfirmOrder = () => {
         {/*  */}
         <div>
           <div className="orderSummary">
-            <Typography>Order Summery</Typography>
+            <Typography  style={{ background: homeBgColor, color: fontColor }}>Order Summery</Typography>
             <div>
               <div>
                 <p>Subtotal:</p>

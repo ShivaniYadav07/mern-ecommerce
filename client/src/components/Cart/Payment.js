@@ -21,9 +21,17 @@ import VpnKeyIcon from "@material-ui/icons/VpnKey";
 import { createOrder, clearErrors } from "../../actions/orderAction";
 import { getAPITokenConfig } from "../../constants/utilCookie";
 import { SERVER_ENDPOINT } from "../../constants/apiEndpoint";
+import { useColorMode, useColorModeValue } from '@chakra-ui/react';
 
 const Payment = () => {
   const orderInfo = JSON.parse(sessionStorage.getItem("orderInfo"));
+  const { colorMode } = useColorMode();
+
+  const homeBgColor =
+    colorMode === 'dark'
+      ? 'conic-gradient(from 45deg at 90% 0%, #050505, #1d1d37)'
+      : 'linear-gradient(to right, #565697, #bebef8)';
+  const fontColor = useColorModeValue('black', '#bfb1d9');
 
   const dispatch = useDispatch();
   const alert = useAlert();
@@ -119,20 +127,20 @@ const Payment = () => {
     <Fragment>
       <MetaData title="Payment" />
       <CheckoutSteps activeStep={2} />
-      <div className="paymentContainer">
+      <div className="paymentContainer"  style={{ background: homeBgColor, color: fontColor }}>
         <form className="paymentForm" onSubmit={(e) => submitHandler(e)}>
-          <Typography>Card Info</Typography>
+          <Typography style={{ background: homeBgColor, color: fontColor }}>Card Info</Typography>
           <div>
-            <CreditCardIcon />
-            <CardNumberElement className="paymentInput" />
+            <CreditCardIcon style={{ color: fontColor }} />
+            <CardNumberElement className="paymentInput" style={{ color: fontColor }}/>
           </div>
           <div>
-            <EventIcon />
-            <CardExpiryElement className="paymentInput" />
+            <EventIcon  style={{ color: fontColor }}/>
+            <CardExpiryElement className="paymentInput"  style={{ color: fontColor }}/>
           </div>
           <div>
-            <VpnKeyIcon />
-            <CardCvcElement className="paymentInput" />
+            <VpnKeyIcon style={{ color: fontColor }} />
+            <CardCvcElement className="paymentInput" style={{ color: fontColor }} />
           </div>
 
           <input

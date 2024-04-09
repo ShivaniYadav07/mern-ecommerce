@@ -2,8 +2,8 @@
     display: grid;
     place-items: center;
     background-color: rgb(255, 255, 255);
-    height: 65vh;
-    margin: 2vmax;
+    height: 100vh;
+    /* margin: 2vmax; */
   }
   
   .paymentForm {
@@ -13,7 +13,7 @@
   
   .paymentForm > p {
     font: 400 2vmax "Roboto";
-    color: rgba(0, 0, 0, 0.753);
+    /* color: rgba(0, 0, 0, 0.753); */
     border-bottom: 1px solid rgba(0, 0, 0, 0.13);
     padding: 1vmax 0;
     text-align: center;
@@ -41,7 +41,7 @@
     position: absolute;
     transform: translateX(1vmax);
     font-size: 1.6vmax;
-    color: rgba(0, 0, 0, 0.623);
+    /* color: rgba(0, 0, 0, 0.623); */
   }
   
   .paymentFormBtn {

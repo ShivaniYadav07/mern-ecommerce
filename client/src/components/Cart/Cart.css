@@ -108,7 +108,7 @@
     justify-content: flex-end;
   }
   .checkOutBtn > button {
-    /* background-color: tomato; */
+    background-color: tomato;
     color: white;
     border: none;
     padding: 0.8vmax 4vmax;
