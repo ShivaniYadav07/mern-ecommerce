@@ -40,8 +40,8 @@
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  border-top: 1px solid rgba(0, 0, 0, 0.205);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.205);
+  border-top: 1px solid rgb(255, 255, 255);
+  border-bottom: 1px solid rgb(255, 255, 255);
   width: 70%;
   padding: 1vmax 0;
 }
@@ -92,7 +92,7 @@
   cursor: pointer;
   color: white;
   transition: all 0.5s;
-  background-color: tomato;
+  background-color: rgb(52, 11, 128);
   font: 500 0.7vmax "Roboto";
   border-radius: 20px;
   padding: 0.5vmax 2vmax;
@@ -105,8 +105,8 @@
 }
 
 .detailsBlock-3 > p {
-  border-top: 1px solid rgba(0, 0, 0, 0.205);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.205);
+  border-top: 1px solid rgb(255, 244, 244);
+  border-bottom: 1px solid rgb(255, 255, 255);
   padding: 1vmax 0;
   color: rgba(0, 0, 0, 0.651);
   font: 400 1vmax "Roboto";
@@ -125,7 +125,7 @@
 
 .submitReview {
   border: none;
-  background-color: tomato;
+  background-color: #330b7e;
   font: 500 0.7vmax "Roboto";
   border-radius: 20px;
   padding: 0.6vmax 2vmax;
@@ -145,7 +145,7 @@
   flex-direction: column;
 }
 .submitDialogTextArea {
-  border: 1px solid rgba(0, 0, 0, 0.082);
+  border: 1px solid rgba(255, 255, 255, 0.082);
   margin: 1vmax 0;
   outline: none;
   padding: 1rem;
@@ -153,14 +153,14 @@
 }
 
 .reviewsHeading {
-  color: #000000be;
+  /* color: #000000be; */
   font: 500 1.4vmax "Roboto";
   text-align: center;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.226);
+  border-bottom: 1px solid rgb(255, 252, 252);
   padding: 1vmax;
-  width: 20vmax;
+  /* width: 20vmax; */
   margin: auto;
-  margin-bottom: 4vmax;
+  /* margin-bottom: 4vmax; */
 }
 .reviews {
   display: flex;
@@ -171,7 +171,7 @@
   flex: none;
 
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.226);
-  border: 1px solid rgba(56, 56, 56, 0.116);
+  border: 1px solid rgba(255, 255, 255, 0.986);
   width: 30vmax;
   display: flex;
   flex-direction: column;
@@ -183,18 +183,19 @@
   width: 5vmax;
 }
 .reviewCard > p {
-  color: rgba(0, 0, 0, 0.836);
+  /* color: rgba(0, 0, 0, 0.836); */
   font: 600 0.9vmax "Roboto";
 }
 .reviewCardComment {
-  color: rgba(0, 0, 0, 0.445);
+  /* color: rgba(0, 0, 0, 0.445); */
   font: 300 0.8vmax cursive;
 }
 
 .noReviews {
   font: 400 1.3vmax "Gill Sans";
   text-align: center;
-  color: rgba(0, 0, 0, 0.548);
+  margin-bottom: 0;
+  /* color: rgba(0, 0, 0, 0.548); */
 }
 
 @media screen and (max-width: 600px) {

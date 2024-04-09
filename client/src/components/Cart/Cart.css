@@ -29,7 +29,7 @@
   }
   
   .cartHeader {
-    /* background-color: tomato; */
+    /* background-color: #330b7e; */
     width: 90%;
     box-sizing: border-box;
     margin: auto;
@@ -94,7 +94,7 @@
   }
   
   .cartGrossProfitBox {
-    /* border-top: 3px solid tomato; */
+    /* border-top: 3px solid #330b7e; */
     margin: 1vmax 4vmax;
     box-sizing: border-box;
     padding: 2vmax 0;
@@ -108,7 +108,7 @@
     justify-content: flex-end;
   }
   .checkOutBtn > button {
-    background-color: tomato;
+    background-color: #330b7e;
     color: white;
     border: none;
     padding: 0.8vmax 4vmax;

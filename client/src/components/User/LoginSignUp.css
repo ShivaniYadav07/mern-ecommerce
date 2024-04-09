@@ -121,7 +121,7 @@
   .loginBtn,
   .signUpBtn {
     border: none;
-    background-color: tomato;
+    background-color: #330b7e;
     color: white;
     font: 300 0.9vmax "Roboto";
     width: 100%;
@@ -135,7 +135,7 @@
   
   .loginBtn:hover,
   .signUpBtn:hover {
-    background-color: rgb(179, 66, 46);
+    background-color: #6f39d3;
   }
   
   .shiftToLeft {

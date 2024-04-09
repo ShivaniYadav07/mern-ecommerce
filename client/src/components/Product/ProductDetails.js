@@ -22,11 +22,19 @@ import {
 import { Rating } from "@material-ui/lab";
 import { NEW_REVIEW_RESET } from "../../constants/productConstants";
 import { useParams } from "react-router";
+import { useColorMode, useColorModeValue } from '@chakra-ui/react';
 
 const ProductDetails = () => {
   const dispatch = useDispatch();
   const alert = useAlert();
   const params = useParams();
+  const { colorMode } = useColorMode();
+
+  const homeBgColor =
+    colorMode === 'dark'
+      ? 'conic-gradient(from 45deg at 90% 0%, #050505, #1d1d37)'
+      : 'linear-gradient(to right, #565697, #bebef8)';
+  const fontColor = useColorModeValue('black', '#bfb1d9');
 
   const { product, loading, error } = useSelector(
     (state) => state.productDetails
@@ -49,7 +57,7 @@ const ProductDetails = () => {
   const [comment, setComment] = useState("");
 
   const increaseQuantity = () => {
-    if (product.Stock <= quantity) return;
+    if (product.stock <= quantity) return;
 
     const qty = quantity + 1;
     setQuantity(qty);
@@ -108,9 +116,9 @@ const ProductDetails = () => {
       ) : (
         <Fragment>
           <MetaData title={`${product.name} -- ECOMMERCE`} />
-          <div className="ProductDetails">
+          <div className="ProductDetails" style={{ background: homeBgColor, color: fontColor }}>
             <div>
-              <Carousel>
+              <Carousel >
                 {product.images &&
                   product.images.map((item, i) => (
                     <img
@@ -124,24 +132,25 @@ const ProductDetails = () => {
             </div>
 
             <div>
-              <div className="detailsBlock-1">
-                <h2>{product.name}</h2>
-                <p>Product # {product._id}</p>
+              <div className="detailsBlock-1" style={{ color: fontColor }}>
+                <h2 style={{ color: fontColor }}>{product.name}</h2>
+                <p style={{ color: fontColor }}>Product # {product._id}</p>
               </div>
               <div className="detailsBlock-2">
                 <Rating {...options} />
-                <span className="detailsBlock-2-span">
+                <span className="detailsBlock-2-span" style={{ color: fontColor }}>
                   {" "}
                   ({product.numOfReviews} Reviews)
                 </span>
               </div>
               <div className="detailsBlock-3">
-                <h1>{`₹${product.price}`}</h1>
+                <h1 style={{ color: fontColor }}>{`₹${product.price}`}</h1>
                 <div className="detailsBlock-3-1">
                   <div className="detailsBlock-3-1-1">
-                    <button onClick={decreaseQuantity}>-</button>
-                    <input readOnly type="number" value={quantity} />
-                    <button onClick={increaseQuantity}>+</button>
+                    <button onClick={decreaseQuantity} style={{ color: fontColor }}>-</button>
+                    <span>{quantity}</span>
+
+                    <button onClick={increaseQuantity} style={{ color: fontColor }}>+</button>
                   </div>
                   <button
                     disabled={product.Stock < 1 ? true : false}
@@ -151,7 +160,7 @@ const ProductDetails = () => {
                   </button>
                 </div>
 
-                <p>
+                <p style={{ color: fontColor }}>
                   Status:
                   <b className={product.Stock < 1 ? "redColor" : "greenColor"}>
                     {product.Stock < 1 ? "OutOfStock" : "InStock"}
@@ -159,8 +168,8 @@ const ProductDetails = () => {
                 </p>
               </div>
 
-              <div className="detailsBlock-4">
-                Description : <p>{product.description}</p>
+              <div className="detailsBlock-4" style={{ color: fontColor }}>
+                Description : <p style={{ color: fontColor }}>{product.description}</p>
               </div>
 
               <button onClick={submitReviewToggle} className="submitReview">
@@ -169,15 +178,16 @@ const ProductDetails = () => {
             </div>
           </div>
 
-          <h3 className="reviewsHeading">REVIEWS</h3>
+          <h3 className="reviewsHeading" style={{ background: homeBgColor, color: fontColor }}>REVIEWS</h3>
 
           <Dialog
             aria-labelledby="simple-dialog-title"
             open={open}
             onClose={submitReviewToggle}
+
           >
-            <DialogTitle>Submit Review</DialogTitle>
-            <DialogContent className="submitDialog">
+            <DialogTitle style={{ color: fontColor }}>Submit Review</DialogTitle>
+            <DialogContent className="submitDialog" style={{ color: fontColor }}>
               <Rating
                 onChange={(e) => setRating(e.target.value)}
                 value={rating}
@@ -190,6 +200,7 @@ const ProductDetails = () => {
                 rows="5"
                 value={comment}
                 onChange={(e) => setComment(e.target.value)}
+                style={{ color: fontColor }}
               ></textarea>
             </DialogContent>
             <DialogActions>
@@ -203,14 +214,14 @@ const ProductDetails = () => {
           </Dialog>
 
           {product.reviews && product.reviews[0] ? (
-            <div className="reviews">
+            <div className="reviews" style={{ background: homeBgColor, color: fontColor }}>
               {product.reviews &&
                 product.reviews.map((review) => (
-                  <ReviewCard key={review._id} review={review} />
+                  <ReviewCard key={review._id} review={review} style={{ background: homeBgColor, color: fontColor }} />
                 ))}
             </div>
           ) : (
-            <p className="noReviews">No Reviews Yet</p>
+            <p className="noReviews" style={{ background: homeBgColor, color: fontColor }}>No Reviews Yet</p>
           )}
         </Fragment>
       )}

@@ -88,7 +88,7 @@ element.style::before {
 
 .productCard > span {
     margin: 0.5vmax 0.5vmax;
-    color: tomato;
+    color: #330b7e;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     font-size: 1vmax;
 }
