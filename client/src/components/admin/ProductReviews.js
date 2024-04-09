@@ -16,12 +16,20 @@ import Star from "@material-ui/icons/Star";
 import SideBar from "./Sidebar";
 import { DELETE_REVIEW_RESET } from "../../constants/productConstants";
 import { useNavigate } from "react-router";
+import { useColorMode, useColorModeValue } from '@chakra-ui/react';
 
 const ProductReviews = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate()
 
   const alert = useAlert();
+  const { colorMode } = useColorMode();
+
+  const homeBgColor =
+    colorMode === 'dark'
+      ? 'conic-gradient(from 45deg at 90% 0%, #050505, #1d1d37)'
+      : 'linear-gradient(to right, #565697, #bebef8)';
+  const fontColor = useColorModeValue('black', '#bfb1d9');
 
   const { error: deleteError, isDeleted } = useSelector(
     (state) => state.review
@@ -133,23 +141,25 @@ const ProductReviews = () => {
     <Fragment>
       <MetaData title={`ALL REVIEWS - Admin`} />
 
-      <div className="dashboard">
+      <div className="dashboard"  style={{ background: homeBgColor, color: fontColor }}>
         <SideBar />
-        <div className="productReviewsContainer">
+        <div className="productReviewsContainer"  style={{ background: homeBgColor, color: fontColor }}>
           <form
             className="productReviewsForm"
             onSubmit={productReviewsSubmitHandler}
+            style={{ background: homeBgColor, color: fontColor }}
           >
-            <h1 className="productReviewsFormHeading">ALL REVIEWS</h1>
+            <h1 className="productReviewsFormHeading" style={{ color: fontColor }}>ALL REVIEWS</h1>
 
             <div>
-              <Star />
+              <Star style={{ color: fontColor }} />
               <input
                 type="text"
                 placeholder="Product Id"
                 required
                 value={productId}
                 onChange={(e) => setProductId(e.target.value)}
+                style={{ background: homeBgColor, color: fontColor }}
               />
             </div>
 
@@ -172,9 +182,10 @@ const ProductReviews = () => {
               disableSelectionOnClick
               className="productListTable"
               autoHeight
+              style={{ color: fontColor }}
             />
           ) : (
-            <h1 className="productReviewsFormHeading">No Reviews Found</h1>
+            <h1 className="productReviewsFormHeading" style={{ color: fontColor }}>No Reviews Found</h1>
           )}
         </div>
       </div>

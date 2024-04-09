@@ -14,12 +14,20 @@ import {
   getAllOrders,
   clearErrors,
 } from "../../actions/orderAction";
+import { useColorMode, useColorModeValue } from '@chakra-ui/react';
 import { DELETE_ORDER_RESET } from "../../constants/orderConstants";
 
 const OrderList = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate()
   const alert = useAlert();
+  const { colorMode } = useColorMode();
+
+  const homeBgColor =
+    colorMode === 'dark'
+      ? 'conic-gradient(from 45deg at 90% 0%, #050505, #1d1d37)'
+      : 'linear-gradient(to right, #565697, #bebef8)';
+  const fontColor = useColorModeValue('black', '#bfb1d9');
 
   const { error, orders } = useSelector((state) => state.allOrders);
 
@@ -122,10 +130,10 @@ const OrderList = () => {
     <Fragment>
       <MetaData title={`ALL ORDERS - Admin`} />
 
-      <div className="dashboard">
+      <div className="dashboard"  style={{ background: homeBgColor, color: fontColor }}>
         <SideBar />
-        <div className="productListContainer">
-          <h1 id="productListHeading">ALL ORDERS</h1>
+        <div className="productListContainer"  style={{ background: homeBgColor, color: fontColor }}>
+          <h1 id="productListHeading" style={{ color: fontColor }}>ALL ORDERS</h1>
 
           <DataGrid
             rows={rows}
@@ -134,6 +142,7 @@ const OrderList = () => {
             disableSelectionOnClick
             className="productListTable"
             autoHeight
+            style={{ background: homeBgColor, color: fontColor }}
           />
         </div>
       </div>

@@ -16,12 +16,20 @@ import AttachMoneyIcon from "@material-ui/icons/AttachMoney";
 import SideBar from "./Sidebar";
 import { UPDATE_PRODUCT_RESET } from "../../constants/productConstants";
 import { useNavigate, useParams } from "react-router";
+import { useColorMode, useColorModeValue } from '@chakra-ui/react';
 
 const UpdateProduct = () => {
   const dispatch = useDispatch();
   const alert = useAlert();
   const navigate = useNavigate();
   const params = useParams();
+  const { colorMode } = useColorMode();
+
+  const homeBgColor =
+    colorMode === 'dark'
+      ? 'conic-gradient(from 45deg at 90% 0%, #050505, #1d1d37)'
+      : 'linear-gradient(to right, #565697, #bebef8)';
+  const fontColor = useColorModeValue('black', '#bfb1d9');
 
   const { error, product } = useSelector((state) => state.productDetails);
 
@@ -130,39 +138,42 @@ const UpdateProduct = () => {
   return (
     <Fragment>
       <MetaData title="Create Product" />
-      <div className="dashboard">
+      <div className="dashboard"  style={{ background: homeBgColor, color: fontColor }}>
         <SideBar />
-        <div className="newProductContainer">
+        <div className="newProductContainer"  style={{ background: homeBgColor, color: fontColor }}>
           <form
             className="createProductForm"
             encType="multipart/form-data"
             onSubmit={updateProductSubmitHandler}
+            style={{color: fontColor }}
           >
             <h1>Create Product</h1>
 
             <div>
-              <SpellcheckIcon />
+              <SpellcheckIcon style={{ color: fontColor }} />
               <input
                 type="text"
                 placeholder="Product Name"
                 required
                 value={name}
                 onChange={(e) => setName(e.target.value)}
+                style={{ background: homeBgColor, color: fontColor }}
               />
             </div>
             <div>
-              <AttachMoneyIcon />
+              <AttachMoneyIcon style={{ color: fontColor }} />
               <input
                 type="number"
                 placeholder="Price"
                 required
                 onChange={(e) => setPrice(e.target.value)}
                 value={price}
+                style={{ background: homeBgColor, color: fontColor }}
               />
             </div>
 
             <div>
-              <DescriptionIcon />
+              <DescriptionIcon style={{ color: fontColor }} />
 
               <textarea
                 placeholder="Product Description"
@@ -170,18 +181,20 @@ const UpdateProduct = () => {
                 onChange={(e) => setDescription(e.target.value)}
                 cols="30"
                 rows="1"
+                style={{ background: homeBgColor, color: fontColor }}
               ></textarea>
             </div>
 
             <div>
-              <AccountTreeIcon />
+              <AccountTreeIcon style={{ color: fontColor }} />
               <select
                 value={category}
                 onChange={(e) => setCategory(e.target.value)}
+                style={{ background: homeBgColor, color: fontColor }}
               >
-                <option value="">Choose Category</option>
+                <option value=" style={{ color: fontColor }}">Choose Category</option>
                 {categories.map((cate) => (
-                  <option key={cate} value={cate}>
+                  <option key={cate} value={cate }  style={{ background: homeBgColor, color: fontColor }}>
                     {cate}
                   </option>
                 ))}
@@ -189,13 +202,14 @@ const UpdateProduct = () => {
             </div>
 
             <div>
-              <StorageIcon />
+              <StorageIcon style={{ color: fontColor }} />
               <input
                 type="number"
                 placeholder="Stock"
                 required
                 onChange={(e) => setStock(e.target.value)}
                 value={Stock}
+                style={{ background: homeBgColor, color: fontColor }}
               />
             </div>
 

@@ -2,7 +2,7 @@
     margin: auto;
     text-align: center;
     padding: 10vmax;
-    height: 50vh;
+    height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -10,19 +10,18 @@
   }
   .emptyCart > svg {
     font-size: 5vmax;
-    color: tomato;
   }
   .emptyCart > p {
     font-size: 2vmax;
   }
   .emptyCart > a {
-    background-color: rgb(51, 51, 51);
-    color: white;
+    background-color: rgb(255, 255, 255);
     border: none;
     padding: 1vmax 3vmax;
     cursor: pointer;
     font: 400 1vmax "Roboto";
     text-decoration: none;
+    margin-top: 2rem;
   }
   
   .cartPage {
@@ -30,7 +29,7 @@
   }
   
   .cartHeader {
-    background-color: tomato;
+    /* background-color: tomato; */
     width: 90%;
     box-sizing: border-box;
     margin: auto;
@@ -61,16 +60,13 @@
   
   .cartInput > button {
     border: none;
-    background-color: rgba(0, 0, 0, 0.616);
+    /* background-color: rgba(0, 0, 0, 0.616); */
     padding: 0.5vmax;
     cursor: pointer;
     color: white;
     transition: all 0.5s;
   }
-  .cartInput > button:hover {
-    background-color: rgba(0, 0, 0, 0.767);
-  }
-  
+ 
   .cartInput > input {
     border: none;
     padding: 0.5vmax;
@@ -78,7 +74,7 @@
     text-align: center;
     outline: none;
     font: 400 0.8vmax "Roboto";
-    color: rgba(0, 0, 0, 0.74);
+    /* color: rgba(0, 0, 0, 0.74); */
   }
   
   .cartSubtotal {
@@ -89,7 +85,7 @@
     box-sizing: border-box;
     font: 300 1vmax cursive;
     justify-content: flex-end;
-    color: rgba(0, 0, 0, 0.753);
+    /* color: rgba(0, 0, 0, 0.753); */
   }
   
   .cartGrossProfit {
@@ -98,7 +94,7 @@
   }
   
   .cartGrossProfitBox {
-    border-top: 3px solid tomato;
+    /* border-top: 3px solid tomato; */
     margin: 1vmax 4vmax;
     box-sizing: border-box;
     padding: 2vmax 0;
@@ -112,7 +108,7 @@
     justify-content: flex-end;
   }
   .checkOutBtn > button {
-    background-color: tomato;
+    /* background-color: tomato; */
     color: white;
     border: none;
     padding: 0.8vmax 4vmax;

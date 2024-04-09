@@ -13,11 +13,19 @@ import AttachMoneyIcon from "@material-ui/icons/AttachMoney";
 import SideBar from "./Sidebar";
 import { NEW_PRODUCT_RESET } from "../../constants/productConstants";
 import { useNavigate } from "react-router";
+import { useColorMode, useColorModeValue } from '@chakra-ui/react';
 
 const NewProduct = () => {
   const dispatch = useDispatch();
   const alert = useAlert();
   const navigate = useNavigate();
+  const { colorMode } = useColorMode();
+
+  const homeBgColor =
+    colorMode === 'dark'
+      ? 'conic-gradient(from 45deg at 90% 0%, #050505, #1d1d37)'
+      : 'linear-gradient(to right, #565697, #bebef8)';
+  const fontColor = useColorModeValue('black', '#bfb1d9');
 
   const { loading, error, success } = useSelector((state) => state.newProduct);
 
@@ -94,36 +102,38 @@ const NewProduct = () => {
       <MetaData title="Create Product" />
       <div className="dashboard">
         <SideBar />
-        <div className="newProductContainer">
+        <div className="newProductContainer"  style={{ background: homeBgColor, color: fontColor }}>
           <form
             className="createProductForm"
             encType="multipart/form-data"
             onSubmit={createProductSubmitHandler}
           >
-            <h1>Create Product</h1>
+            <h1 style={{ color: fontColor }}>Create Product</h1>
 
-            <div>
-              <SpellcheckIcon />
+            <div >
+              <SpellcheckIcon style={{ color: fontColor }}/>
               <input
                 type="text"
                 placeholder="Product Name"
                 required
                 value={name}
                 onChange={(e) => setName(e.target.value)}
+                style={{ background: homeBgColor, color: fontColor }}
               />
             </div>
-            <div>
-              <AttachMoneyIcon />
+            <div  >
+              <AttachMoneyIcon  style={{ color: fontColor }} />
               <input
                 type="number"
                 placeholder="Price"
                 required
                 onChange={(e) => setPrice(e.target.value)}
+                style={{ background: homeBgColor, color: fontColor }}
               />
             </div>
 
             <div>
-              <DescriptionIcon />
+              <DescriptionIcon style={{ color: fontColor }} />
 
               <textarea
                 placeholder="Product Description"
@@ -131,15 +141,16 @@ const NewProduct = () => {
                 onChange={(e) => setDescription(e.target.value)}
                 cols="1"
                 rows="1"
+                style={{ background: homeBgColor, color: fontColor }}
               ></textarea>
             </div>
 
             <div>
-              <AccountTreeIcon />
-              <select onChange={(e) => setCategory(e.target.value)}>
-                <option value="">Choose Category</option>
+              <AccountTreeIcon style={{ color: fontColor }}/>
+              <select onChange={(e) => setCategory(e.target.value)}  style={{ background: homeBgColor, color: fontColor }}>
+                <option value=""  style={{ background: homeBgColor, color: fontColor }}>Choose Category</option>
                 {categories.map((cate) => (
-                  <option key={cate} value={cate}>
+                  <option key={cate} value={cate} >
                     {cate}
                   </option>
                 ))}
@@ -147,12 +158,13 @@ const NewProduct = () => {
             </div>
 
             <div>
-              <StorageIcon />
+              <StorageIcon  style={{ color: fontColor }}/>
               <input
                 type="number"
                 placeholder="Stock"
                 required
                 onChange={(e) => setStock(e.target.value)}
+                style={{ background: homeBgColor, color: fontColor }}
               />
             </div>
 
@@ -163,6 +175,7 @@ const NewProduct = () => {
                 accept="image/*"
                 onChange={createProductImagesChange}
                 multiple
+                style={{ background: homeBgColor, color: fontColor }}
               />
             </div>
 
@@ -176,6 +189,7 @@ const NewProduct = () => {
               id="createProductBtn"
               type="submit"
               disabled={loading ? true : false}
+              
             >
               Create
             </Button>

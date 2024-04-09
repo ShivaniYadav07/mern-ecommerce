@@ -10,12 +10,19 @@ import { useAlert } from "react-alert";
 import Typography from "@material-ui/core/Typography";
 import MetaData from "../layout/MetaData";
 import LaunchIcon from "@material-ui/icons/Launch";
+import { useColorMode, useColorModeValue } from '@chakra-ui/react';
 
 const MyOrders = () => {
   const dispatch = useDispatch();
 
   const alert = useAlert();
+  const { colorMode } = useColorMode();
 
+  const homeBgColor =
+    colorMode === 'dark'
+      ? 'conic-gradient(from 45deg at 90% 0%, #050505, #1d1d37)'
+      : 'linear-gradient(to right, #565697, #bebef8)';
+  const fontColor = useColorModeValue('black', '#bfb1d9');
   const { loading, error, orders } = useSelector((state) => state.allOrders);
   const { user } = useSelector((state) => state.user);
 
@@ -93,7 +100,7 @@ const MyOrders = () => {
       {loading ? (
         <Loader />
       ) : (
-        <div className="myOrdersPage">
+        <div className="myOrdersPage"  style={{ background: homeBgColor, color: fontColor }}>
           <DataGrid
             rows={rows}
             columns={columns}
@@ -101,9 +108,10 @@ const MyOrders = () => {
             disableSelectionOnClick
             className="myOrdersTable"
             autoHeight
+            style={{ background: homeBgColor, color: fontColor }}
           />
 
-          <Typography id="myOrdersHeading">{user.name}'s Orders</Typography>
+          <Typography id="myOrdersHeading"  style={{ background: homeBgColor, color: fontColor }}>{user.name}'s Orders</Typography>
         </div>
       )}
     </Fragment>

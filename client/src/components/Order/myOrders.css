@@ -19,21 +19,22 @@
     box-sizing: border-box;
     color: rgb(255, 255, 255);
     transition: all 0.5s;
-    background-color: rgb(44, 44, 44);
+    /* background-color: rgb(44, 44, 44); */
   }
   
-  .myOrdersTable {
+  /* .myOrdersTable {
     background-color: white;
-  }
+  } */
   
   .myOrdersTable div {
+
     font: 300 1vmax "Roboto";
-    color: rgba(0, 0, 0, 0.678);
+    /* color: rgba(0, 0, 0, 0.678); */
     border: none;
   }
   
   .myOrdersTable a {
-    color: rgba(0, 0, 0, 0.527);
+    /* color: rgba(0, 0, 0, 0.527); */
     transition: all 0.5s;
   }
   
@@ -42,12 +43,12 @@
   }
   
   .MuiDataGrid-columnHeader {
-    background-color: tomato;
+    /* background-color: tomato; */
     padding: 1vmax !important;
   }
   
   .MuiDataGrid-columnHeader div {
-    color: rgb(255, 255, 255);
+    /* color: rgb(255, 255, 255); */
     font: 500 1.1vmax "Roboto" !important;
   }
   

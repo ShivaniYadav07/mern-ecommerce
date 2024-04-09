@@ -14,12 +14,20 @@ import MetaData from "../layout/MetaData";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
 import SideBar from "./Sidebar";
+import { useColorMode, useColorModeValue } from '@chakra-ui/react';
 import { DELETE_PRODUCT_RESET } from "../../constants/productConstants";
 
 const ProductList = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const alert = useAlert();
+  const { colorMode } = useColorMode();
+
+  const homeBgColor =
+    colorMode === 'dark'
+      ? 'conic-gradient(from 45deg at 90% 0%, #050505, #1d1d37)'
+      : 'linear-gradient(to right, #565697, #bebef8)';
+  const fontColor = useColorModeValue('black', '#bfb1d9');
 
   const { error, products } = useSelector((state) => state.products);
 
@@ -119,10 +127,10 @@ const ProductList = () => {
     <Fragment>
       <MetaData title={`ALL PRODUCTS - Admin`} />
 
-      <div className="dashboard">
+      <div className="dashboard"  style={{ background: homeBgColor, color: fontColor }}>
         <SideBar />
-        <div className="productListContainer">
-          <h1 id="productListHeading">ALL PRODUCTS</h1>
+        <div className="productListContainer"  style={{ background: homeBgColor, color: fontColor }}>
+          <h1 id="productListHeading"  style={{ background: homeBgColor, color: fontColor }}>ALL PRODUCTS</h1>
 
           <DataGrid
             rows={rows}
@@ -131,6 +139,7 @@ const ProductList = () => {
             disableSelectionOnClick
             className="productListTable"
             autoHeight
+            style={{ background: homeBgColor, color: fontColor }}
           />
         </div>
       </div>

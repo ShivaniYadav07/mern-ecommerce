@@ -11,11 +11,19 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import SideBar from "./Sidebar";
 import { getAllUsers, clearErrors, deleteUser } from "../../actions/userAction";
 import { DELETE_USER_RESET } from "../../constants/userConstants";
+import { useColorMode, useColorModeValue } from '@chakra-ui/react';
 
 const UsersList = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const alert = useAlert();
+  const { colorMode } = useColorMode();
+
+  const homeBgColor =
+    colorMode === 'dark'
+      ? 'conic-gradient(from 45deg at 90% 0%, #050505, #1d1d37)'
+      : 'linear-gradient(to right, #565697, #bebef8)';
+  const fontColor = useColorModeValue('black', '#bfb1d9');
 
   const { error, users } = useSelector((state) => state.allUsers);
 
@@ -121,10 +129,10 @@ const UsersList = () => {
     <Fragment>
       <MetaData title={`ALL USERS - Admin`} />
 
-      <div className="dashboard">
+      <div className="dashboard"  style={{ background: homeBgColor, color: fontColor }}>
         <SideBar />
-        <div className="productListContainer">
-          <h1 id="productListHeading">ALL USERS</h1>
+        <div className="productListContainer"  style={{ background: homeBgColor, color: fontColor }}>
+          <h1 id="productListHeading" style={{ color: fontColor }}>ALL USERS</h1>
 
           <DataGrid
             rows={rows}
@@ -133,6 +141,7 @@ const UsersList = () => {
             disableSelectionOnClick
             className="productListTable"
             autoHeight
+            style={{ color: fontColor }}
           />
         </div>
       </div>

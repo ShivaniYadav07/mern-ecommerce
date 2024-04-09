@@ -1,11 +1,11 @@
-.orderDetailsPage {
+/* .orderDetailsPage {
     background-color: white;
-  }
+  } */
   
   .orderDetailsContainer > h1 {
     font: 300 3vmax "Roboto";
     margin: 4vmax 0;
-    color: tomato;
+    /* color: tomato; */
   }
   
   .orderDetailsContainer {
@@ -29,12 +29,12 @@
   
   .orderDetailsContainerBox > div > p {
     font: 400 1vmax "Roboto";
-    color: black;
+    /* color: black; */
   }
   .orderDetailsContainerBox > div > span {
     margin: 0 1vmax;
     font: 100 1vmax "Roboto";
-    color: #575757;
+    /* color: #575757; */
   }
   
   .orderDetailsCartItems > p {
@@ -43,7 +43,7 @@
   
   .orderDetailsCartItems {
     padding: 2vmax 5vmax;
-    border-top: 1px solid rgba(0, 0, 0, 0.164);
+    /* border-top: 1px solid rgba(0, 0, 0, 0.164); */
   }
   
   .orderDetailsCartItemsContainer > div {
@@ -58,7 +58,7 @@
   }
   
   .orderDetailsCartItemsContainer > div > a {
-    color: #575757;
+    /* color: #575757; */
     margin: 0 2vmax;
     width: 60%;
     text-decoration: none;

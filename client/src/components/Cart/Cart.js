@@ -6,11 +6,19 @@ import { addItemsToCart, removeItemsFromCart } from "../../actions/cartAction";
 import { Typography } from "@material-ui/core";
 import RemoveShoppingCartIcon from "@material-ui/icons/RemoveShoppingCart";
 import { Link, useNavigate } from "react-router-dom";
+import { useColorMode, useColorModeValue } from '@chakra-ui/react';
 
 const Cart = () => {
   const dispatch = useDispatch();
   const nevigate = useNavigate()
   const { cartItems } = useSelector((state) => state.cart);
+  const { colorMode } = useColorMode();
+
+  const homeBgColor =
+    colorMode === 'dark'
+      ? 'conic-gradient(from 45deg at 90% 0%, #050505, #1d1d37)'
+      : 'linear-gradient(to right, #565697, #bebef8)';
+  const fontColor = useColorModeValue('black', '#bfb1d9');
 
   const increaseQuantity = (id, quantity, stock) => {
     const newQty = quantity + 1;
@@ -39,30 +47,31 @@ const Cart = () => {
   return (
     <Fragment>
       {cartItems.length === 0 ? (
-        <div className="emptyCart">
+        <div className="emptyCart"  style={{ background: homeBgColor, color: fontColor }}>
           <RemoveShoppingCartIcon />
 
-          <Typography>No Product in Your Cart</Typography>
-          <Link to="/products">View Products</Link>
+          <Typography  style={{ background: homeBgColor, color: fontColor }}>No Product in Your Cart</Typography>
+          <Link to="/products"  style={{ background: homeBgColor, color: fontColor }}>View Products</Link>
         </div>
       ) : (
         <Fragment>
-          <div className="cartPage">
-            <div className="cartHeader">
-              <p>Product</p>
-              <p>Quantity</p>
-              <p>Subtotal</p>
+          <div className="cartPage"  style={{ background: homeBgColor, color: fontColor }}>
+            <div className="cartHeader"  style={{  color: fontColor }}>
+              <p style={{ color: fontColor }}>Product</p>
+              <p style={{ color: fontColor }}>Quantity</p>
+              <p style={{ color: fontColor }}>Subtotal</p>
             </div>
 
             {cartItems &&
               cartItems.map((item) => (
-                <div className="cartContainer" key={item.product}>
-                  <CartItemCard item={item} deleteCartItems={deleteCartItems} />
-                  <div className="cartInput">
+                <div className="cartContainer" key={item.product}  style={{ color: fontColor }}>
+                  <CartItemCard item={item} deleteCartItems={deleteCartItems}  style={{  color: fontColor }}/>
+                  <div className="cartInput"  style={{color: fontColor }}>
                     <button
                       onClick={() =>
                         decreaseQuantity(item.product, item.quantity)
                       }
+                      style={{  color: fontColor }}
                     >
                       -
                     </button>
@@ -75,6 +84,7 @@ const Cart = () => {
                           item.stock
                         )
                       }
+                      style={{ color: fontColor }}
                     >
                       +
                     </button>
@@ -85,7 +95,7 @@ const Cart = () => {
                 </div>
               ))}
 
-            <div className="cartGrossProfit">
+            <div className="cartGrossProfit"  style={{ background: homeBgColor, color: fontColor }}>
               <div></div>
               <div className="cartGrossProfitBox">
                 <p>Gross Total</p>
@@ -96,7 +106,7 @@ const Cart = () => {
               </div>
               <div></div>
               <div className="checkOutBtn">
-                <button onClick={checkoutHandler}>Check Out</button>
+                <button onClick={checkoutHandler} style={{ color: fontColor }}>Check Out</button>
               </div>
             </div>
           </div>
