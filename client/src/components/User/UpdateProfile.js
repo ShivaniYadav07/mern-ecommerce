@@ -9,6 +9,7 @@ import { useAlert } from "react-alert";
 import { useNavigate } from "react-router-dom";
 import { UPDATE_PROFILE_RESET } from "../../constants/userConstants";
 import MetaData from "../layout/MetaData";
+import { useColorMode, useColorModeValue } from '@chakra-ui/react';
 
 
 const UpdateProfile = () => {
@@ -23,6 +24,13 @@ const UpdateProfile = () => {
 
   const [avatar, setAvatar] = useState();
   const [avatarPreview, setAvatarPreview] = useState("");
+  const { colorMode } = useColorMode();
+
+  const homeBgColor =
+    colorMode === 'dark'
+      ? 'conic-gradient(from 45deg at 90% 0%, #050505, #1d1d37)'
+      : 'linear-gradient(to right, #565697, #bebef8)';
+  const fontColor = useColorModeValue('black', '#bfb1d9');
 
   const updateProfileSubmit = (e) => {
     e.preventDefault();
@@ -75,7 +83,7 @@ if(user){
   return (
     <Fragment>{loading ? (<Loader />) : (<Fragment>
         <MetaData title='Update Profile'/>
-    <div className="updateProfileContainer">
+    <div className="updateProfileContainer"  style={{ background: homeBgColor, color: fontColor }}>
                 <div className="updateProfileBox">
                     <h2 className="updateProfileHeading">Update Profile</h2>
                 <form
@@ -84,7 +92,7 @@ if(user){
                     onSubmit={updateProfileSubmit}
                   >
                     <div className="updateProfileName">
-                      <FaceIcon />
+                      <FaceIcon style={{ color: fontColor }} />
                       <input
                         type="text"
                         placeholder="Name"
@@ -92,10 +100,11 @@ if(user){
                         name="name"
                         value={name}
                         onChange={(e) => setName(e.target.value)}
+                        style={{ background: homeBgColor, color: fontColor }}
                       />
                     </div>
                     <div className="updateProfileEmail">
-                      <MailOutlineIcon />
+                      <MailOutlineIcon style={{ color: fontColor }} />
                       <input
                         type="email"
                         placeholder="Email"
@@ -103,15 +112,18 @@ if(user){
                         name="email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
+                        style={{ background: homeBgColor, color: fontColor }}
                       />
                     </div>
-                    <div id="updateProfileImage">
+                    <div id="updateProfileImage" >
                       <img src={avatarPreview} alt="Avatar Preview" />
                       <input
                         type="file"
                         name="avatar"
                         accept="image/*"
                         onChange={updateProfileDataChange}
+                        style={{ background: homeBgColor, color: fontColor }}
+                        
                       />
                     </div>
                     <input type="submit" value="update" className="updateProfileBtn" />

@@ -10,7 +10,7 @@ import LockOpenIcon from "@material-ui/icons/LockOpen";
 import LockIcon from "@material-ui/icons/Lock";
 import VpnKeyIcon from "@material-ui/icons/VpnKey";
 import { useNavigate } from "react-router-dom";
-
+import { useColorMode, useColorModeValue } from '@chakra-ui/react';
 const UpdatePassword = () => {
   const dispatch = useDispatch();
   const alert = useAlert();
@@ -20,7 +20,13 @@ const UpdatePassword = () => {
 
   const [oldPassword, setOldPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState(""); const { colorMode } = useColorMode();
+
+  const homeBgColor =
+    colorMode === 'dark'
+      ? 'conic-gradient(from 45deg at 90% 0%, #050505, #1d1d37)'
+      : 'linear-gradient(to right, #565697, #bebef8)';
+  const fontColor = useColorModeValue('black', '#bfb1d9');
 
   const updatePasswordSubmit = (e) => {
     e.preventDefault();
@@ -58,43 +64,47 @@ const UpdatePassword = () => {
       ) : (
         <Fragment>
           <MetaData title="Change Password" />
-          <div className="updatePasswordContainer">
+          <div className="updatePasswordContainer" style={{ background: homeBgColor, color: fontColor }} >
             <div className="updatePasswordBox">
-              <h2 className="updatePasswordHeading">Update Profile</h2>
+              <h2 className="updatePasswordHeading" style={{ color: fontColor }}>Update Profile</h2>
 
               <form
                 className="updatePasswordForm"
                 onSubmit={updatePasswordSubmit}
+                
               >
-                <div className="loginPassword">
-                  <VpnKeyIcon />
+                <div className="loginPassword"  style={{ background: homeBgColor, color: fontColor }}>
+                  <VpnKeyIcon style={{ color: fontColor }} />
                   <input
                     type="password"
                     placeholder="Old Password"
                     required
                     value={oldPassword}
                     onChange={(e) => setOldPassword(e.target.value)}
+                    style={{ background: homeBgColor, color: fontColor }}
                   />
                 </div>
 
                 <div className="loginPassword">
-                  <LockOpenIcon />
+                  <LockOpenIcon style={{ color: fontColor }} />
                   <input
                     type="password"
                     placeholder="New Password"
                     required
                     value={newPassword}
                     onChange={(e) => setNewPassword(e.target.value)}
+                    style={{ background: homeBgColor, color: fontColor }}
                   />
                 </div>
                 <div className="loginPassword">
-                  <LockIcon />
+                  <LockIcon style={{ color: fontColor }} />
                   <input
                     type="password"
                     placeholder="Confirm Password"
                     required
                     value={confirmPassword}
                     onChange={(e) => setConfirmPassword(e.target.value)}
+                    style={{ background: homeBgColor, color: fontColor }}
                   />
                 </div>
                 <input

@@ -8,11 +8,19 @@ import MetaData from "../layout/MetaData";
 import LockOpenIcon from "@material-ui/icons/LockOpen";
 import LockIcon from "@material-ui/icons/Lock";
 import { useNavigate } from "react-router-dom";
+import { useColorMode, useColorModeValue } from '@chakra-ui/react';
 
 const ResetPassword = ({ match }) => {
   const dispatch = useDispatch();
   const alert = useAlert();
   const nevigate = useNavigate();
+  const { colorMode } = useColorMode();
+
+  const homeBgColor =
+    colorMode === 'dark'
+      ? 'conic-gradient(from 45deg at 90% 0%, #050505, #1d1d37)'
+      : 'linear-gradient(to right, #565697, #bebef8)';
+  const fontColor = useColorModeValue('black', '#bfb1d9');
   const { error, success, loading } = useSelector(
     (state) => state.forgotPassword
   );
@@ -51,9 +59,9 @@ const ResetPassword = ({ match }) => {
       ) : (
         <Fragment>
           <MetaData title="Change Password" />
-          <div className="resetPasswordContainer">
-            <div className="resetPasswordBox">
-              <h2 className="resetPasswordHeading">Update Profile</h2>
+          <div className="resetPasswordContainer" >
+            <div className="resetPasswordBox"  style={{ background: homeBgColor, color: fontColor }}>
+              <h2 className="resetPasswordHeading" style={{ color: fontColor }}>Update Profile</h2>
 
               <form
                 className="resetPasswordForm"

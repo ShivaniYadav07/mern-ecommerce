@@ -6,10 +6,18 @@ import { useDispatch, useSelector } from "react-redux";
 import { clearErrors, forgotPassword } from "../../actions/userAction";
 import { useAlert } from "react-alert";
 import MetaData from "../layout/MetaData";
+import { useColorMode, useColorModeValue } from '@chakra-ui/react';
 
 const ForgotPassword = () => {
   const dispatch = useDispatch();
   const alert = useAlert();
+  const { colorMode } = useColorMode();
+
+  const homeBgColor =
+    colorMode === 'dark'
+      ? 'conic-gradient(from 45deg at 90% 0%, #050505, #1d1d37)'
+      : 'linear-gradient(to right, #565697, #bebef8)';
+  const fontColor = useColorModeValue('black', '#bfb1d9');
 
   const { error, message, loading } = useSelector(
     (state) => state.forgotPassword
@@ -44,16 +52,17 @@ const ForgotPassword = () => {
       ) : (
         <Fragment>
           <MetaData title="Forgot Password" />
-          <div className="forgotPasswordContainer">
+          <div className="forgotPasswordContainer"  style={{ background: homeBgColor, color: fontColor }}>
             <div className="forgotPasswordBox">
               <h2 className="forgotPasswordHeading">Forgot Password</h2>
 
               <form
                 className="forgotPasswordForm"
                 onSubmit={forgotPasswordSubmit}
+
               >
                 <div className="forgotPasswordEmail">
-                  <MailOutlineIcon />
+                  <MailOutlineIcon style={{ color: fontColor }} />
                   <input
                     type="email"
                     placeholder="Email"
@@ -61,6 +70,7 @@ const ForgotPassword = () => {
                     name="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
+                    style={{ background: homeBgColor, color: fontColor }}
                   />
                 </div>
 

@@ -15,12 +15,20 @@ import {
 } from "../../actions/userAction";
 import Loader from "../layout/Loader/Loader";
 import { useNavigate, useParams } from "react-router";
+import { useColorMode, useColorModeValue } from '@chakra-ui/react';
 
 const UpdateUsers = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const params = useParams();
   const alert = useAlert();
+  const { colorMode } = useColorMode();
+
+  const homeBgColor =
+    colorMode === 'dark'
+      ? 'conic-gradient(from 45deg at 90% 0%, #050505, #1d1d37)'
+      : 'linear-gradient(to right, #565697, #bebef8)';
+  const fontColor = useColorModeValue('black', '#bfb1d9');
 
   const { loading, error, user } = useSelector((state) => state.userDetails);
 
@@ -76,9 +84,9 @@ const UpdateUsers = () => {
   return (
     <Fragment>
       <MetaData title="Update User" />
-      <div className="dashboard">
+      <div className="dashboard"  style={{ background: homeBgColor, color: fontColor }}>
         <SideBar />
-        <div className="newProductContainer">
+        <div className="newProductContainer"  style={{ background: homeBgColor, color: fontColor }}>
           {loading ? (
             <Loader />
           ) : (
@@ -89,32 +97,34 @@ const UpdateUsers = () => {
               <h1>Update User</h1>
 
               <div>
-                <PersonIcon />
+                <PersonIcon style={{ color: fontColor }} />
                 <input
                   type="text"
                   placeholder="Name"
                   required
                   value={name}
                   onChange={(e) => setName(e.target.value)}
+                  style={{ background: homeBgColor, color: fontColor }}
                 />
               </div>
               <div>
-                <MailOutlineIcon />
+                <MailOutlineIcon style={{ color: fontColor }} />
                 <input
                   type="email"
                   placeholder="Email"
                   required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
+                  style={{ background: homeBgColor, color: fontColor }}
                 />
               </div>
 
               <div>
-                <VerifiedUserIcon />
-                <select value={role} onChange={(e) => setRole(e.target.value)}>
-                  <option value="">Choose Role</option>
-                  <option value="admin">Admin</option>
-                  <option value="user">User</option>
+                <VerifiedUserIcon style={{ color: fontColor }} />
+                <select value={role} onChange={(e) => setRole(e.target.value)}  style={{ background: homeBgColor, color: fontColor }}>
+                  <option value=""  style={{ background: homeBgColor, color: fontColor }}>Choose Role</option>
+                  <option  style={{ background: homeBgColor, color: fontColor }}value="admin">Admin</option>
+                  <option  style={{ background: homeBgColor, color: fontColor }} value="user">User</option>
                 </select>
               </div>
 

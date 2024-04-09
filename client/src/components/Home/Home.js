@@ -71,8 +71,8 @@ const Home = ({ products: propProducts }) => {
               <Button colorScheme='teal'>Scroll</Button>
             </a>
           </div>
-          <h2 className='homeHeading' style={{ background: homeBgColor, color: fontColor }}>Featured Products</h2>
           <div className='banner_2' id='container' style={{ background: homeBgColor, color: fontColor }}>
+          <h2 className='homeHeading' style={{ color: fontColor }}>Featured Products</h2>
             <SimpleGrid columns={[2, 4]} spacing='40px'>
               {products && products.map((product) => (
                 <ProductCard product={product} key={product._id} />

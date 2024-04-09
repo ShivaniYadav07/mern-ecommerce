@@ -21,7 +21,7 @@
   
   .updateProfileHeading {
     text-align: center;
-    color: rgba(0, 0, 0, 0.664);
+    /* color: rgba(0, 0, 0, 0.664); */
     font: 400 1.3vmax "Roboto";
     padding: 1.3vmax;
     border-bottom: 1px solid rgba(0, 0, 0, 0.205);
@@ -86,11 +86,11 @@
     transition: all 0.5s;
     padding: 0 1vmax;
     color: rgba(0, 0, 0, 0.623);
-    background-color: rgb(255, 255, 255);
+    /* background-color: rgb(255, 255, 255); */
   }
   
   #updateProfileImage > input::file-selector-button:hover {
-    background-color: rgb(235, 235, 235);
+    background-color: #bfb1d9;
   }
   
   .updateProfileBtn {

@@ -13,8 +13,6 @@
 
 }
 .banner_2{
-    background-image: linear-gradient(to right, #565697, #bebef8);
-    height: auto;
     position: relative;
     top: 0;
     display: flex;
@@ -23,6 +21,7 @@
     align-items: center;
     justify-content: center;
     color: white;
+    /* padding-top: 5rem; */
 }
 .banner >h1{
     margin: 5vmax;
@@ -54,7 +53,7 @@ element.style::before {
     font-size: 1.4vmax;
     /* border-bottom: 1px solid rgba(21, 21, 21, 0.5); */
     color: rgb(0, 0, 0, 0.7);
-    margin: 0;
+    margin: 70px 0px 50px 0px;
 }
 .productCard{
     width: 14vmax;
