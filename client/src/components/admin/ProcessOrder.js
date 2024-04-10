@@ -15,11 +15,20 @@ import AccountTreeIcon from "@material-ui/icons/AccountTree";
 import { Button } from "@material-ui/core";
 import { UPDATE_ORDER_RESET } from "../../constants/orderConstants";
 import "./processOrder.css";
+import { useColorMode, useColorModeValue } from '@chakra-ui/react';
 
 const ProcessOrder = () => {
+
+  const  {colorMode}  = useColorMode();
+  const fontColor = useColorModeValue('black', '#bfb1d9');
+  const homeBgColor =
+  colorMode === 'dark'
+    ? 'conic-gradient(from 45deg at 90% 0%, #050505, #1d1d37)'
+    : 'linear-gradient(to right, #565697, #bebef8)';
     const params = useParams();
   const { order, error, loading } = useSelector((state) => state.orderDetails);
   const { error: updateError, isUpdated } = useSelector((state) => state.order);
+  
 
   const updateOrderSubmitHandler = (e) => {
     e.preventDefault();
@@ -56,9 +65,9 @@ const ProcessOrder = () => {
   return (
     <Fragment>
       <MetaData title="Process Order" />
-      <div className="dashboard">
+      <div className="dashboard"  style={{ background: homeBgColor, color: fontColor }}>
         <SideBar />
-        <div className="newProductContainer">
+        <div className="newProductContainer"  style={{ background: homeBgColor, color: fontColor }}>
           {loading ? (
             <Loader />
           ) : (

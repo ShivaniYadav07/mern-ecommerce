@@ -91,8 +91,8 @@ export const updateOrder = (id, order) => async (dispatch) => {
     // };
     const { data } = await axios.put(
       `${SERVER_ENDPOINT}/api/v1/admin/order/${id}`,
-      getAPITokenConfig(),
       order,
+      getAPITokenConfig(),
       // config
     );
 
