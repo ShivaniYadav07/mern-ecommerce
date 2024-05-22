@@ -1,15 +1,19 @@
 const express = require("express");
-const app = express();
 const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
 const fileUpload = require("express-fileupload");
-const errorMiddleware = require("./middleware/error");
 const path = require("path");
 const cors = require("cors");
-//config
+const errorMiddleware = require("./middleware/error");
+
+const app = express();
+
+// Load environment variables if not in production
 if (process.env.NODE_ENV !== "PRODUCTION") {
-  require("dotenv").config({ path: "server/config/config.env" });
+  require("dotenv").config({ path: path.join(__dirname, "config/.env") });
 }
+
+// Middleware
 app.use(
   cors({
     origin: ["https://mern-ecommerce-fc7df.web.app", "http://localhost:3000"],
@@ -19,16 +23,10 @@ app.use(
 app.use(cookieParser());
 app.use(express.json());
 app.use(bodyParser.json({ limit: "50mb" }));
-app.use(
-  bodyParser.urlencoded({
-    extended: true,
-    limit: "50mb",
-    parameterLimit: 50000,
-  })
-);
+app.use(bodyParser.urlencoded({ extended: true, limit: "50mb", parameterLimit: 50000 }));
 app.use(fileUpload());
 
-//Route import
+// Route imports
 const products = require("./routes/productRoute");
 const user = require("./routes/userRoute");
 const order = require("./routes/orderRoute");
@@ -39,12 +37,14 @@ app.use("/api/v1", user);
 app.use("/api/v1", order);
 app.use("/api/v1", payment);
 
+// Serve static files
 app.use(express.static(path.join(__dirname, "../client/build")));
 
 app.get("*", (req, res) => {
   res.sendFile(path.resolve(__dirname, "../client/build/index.html"));
 });
-//Middleware for Error
+
+// Middleware for errors
 app.use(errorMiddleware);
 
 module.exports = app;
