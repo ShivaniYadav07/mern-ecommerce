@@ -1,11 +1,10 @@
 {
-  "version": 2,
-  "name": "mern-ecommerce",
-  "builds": [
-    { "src": "server/server/server.js", "use": "@vercel/node" }
-  ],
-  "routes": [
-    { "src": "/api/(.*)", "dest": "/server/server/server.js" },
-    { "src": "/(.*)", "dest": "/client/build/$1" }
-  ]
+   "version": 2,
+   "name": "music-album",
+   "builds": [
+      { "src": "app.js", "use": "@vercel/node" }
+   ],
+   "routes": [
+      { "src": "/(.*)", "dest": "/app.js" }
+   ]
 }
