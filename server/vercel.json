@@ -2,11 +2,9 @@
     "version": 2,
     "name": "mern-ecommerce",
     "builds": [
-      { "src": "server/app.js", "use": "@vercel/node" },
-      { "src": "client/build/", "use": "@vercel/static" }
+      { "src": "app.js", "use": "@vercel/node" }
     ],
     "routes": [
-      { "src": "/api/(.*)", "dest": "server/app.js" },
-      { "src": "/(.*)", "dest": "client/build/$1" }
+      { "src": "/api/(.*)", "dest": "app.js" }
     ]
   }
